@@ -1,17 +1,434 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
 
+const benefits = [
+  {
+    title: 'Ein Ansprechpartner',
+    description: 'Für die komplette Baulogistik – keine Kommunikationsbrüche.',
+    icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z',
+  },
+  {
+    title: 'Klare Verantwortlichkeiten',
+    description: 'Transparente Zuständigkeiten und lückenlose Dokumentation.',
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+  {
+    title: 'Effizientere Abläufe',
+    description: 'Optimierte Logistik reduziert Stillstand und steigert Produktivität.',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+  },
+  {
+    title: '24/7 Verfügbarkeit',
+    description: 'Rund um die Uhr für Sie da – auch an Wochenenden und Feiertagen.',
+    icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+  {
+    title: 'Entlastung der Bauleitung',
+    description: 'Weniger Schnittstellen, weniger Aufwand – mehr Zeit für das Wesentliche.',
+    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+  },
+];
+
+const steps = [
+  {
+    number: '01',
+    title: 'Analyse',
+    description: 'Vor-Ort-Bedarfsanalyse Ihrer Baustelle. Wir identifizieren Engpässe und optimierungspotenziale.',
+    icon: 'M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z',
+  },
+  {
+    number: '02',
+    title: 'Konzept',
+    description: 'Maßgeschneidertes Baulogistikkonzept – individuell auf Ihr Projekt zugeschnitten.',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
+  },
+  {
+    number: '03',
+    title: 'Einsatz',
+    description: 'Qualifiziertes METRA-Team vor Ort. Professionelle Umsetzung.',
+    icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z',
+  },
+  {
+    number: '04',
+    title: 'Reporting',
+    description: 'Lückenlose Dokumentation. Tagesberichte, Protokolle und Übergaben für volle Transparenz.',
+    icon: 'M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+];
+
+const services = [
+  {
+    title: 'Zufahrts- und Liefersteuerung',
+    description: 'Steuerung von Zufahrten und Lieferungen für reibungslosen Baustellenverkehr.',
+    image: '/images/leistung1.png',
+    icon: 'M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0',
+  },
+  {
+    title: 'Material- und Personalflusskoordination',
+    description: 'Koordination von Material und Personal für optimale Ressourcennutzung.',
+    image: '/images/leistung2.png',
+    icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
+  },
+  {
+    title: 'Baustellenorganisation',
+    description: 'Organisation und Ablaufsteuerung der Baustelle von der Planung bis zur Übergabe.',
+    image: '/images/leistung3.png',
+    icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
+  },
+  {
+    title: 'Koordination von Lieferungen und Gewerken',
+    description: 'Synchronisation aller Gewerke und Lieferanten für termingerechte Abläufe.',
+    image: '/images/leistung4.png',
+    icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z',
+  },
+  {
+    title: 'Unterstützung der Bauleitung',
+    description: 'Als verlängerter Arm der Bauleitung vor Ort – operative Unterstützung.',
+    image: '/images/leistung5.png',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    title: 'Tagesberichte & Protokolle',
+    description: 'Lückenlose Dokumentation mit Tagesberichten, Protokollen und Übergaben.',
+    image: '/images/leistung6.png',
+    icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+  },
+  {
+    title: 'Integrierte Baustellensicherheit',
+    description: 'Sicherheitsleistungen logistisch mitgedacht und nahtlos integriert.',
+    image: '/images/leistung7.png',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+  },
+  {
+    title: 'Unterstützende Services',
+    description: 'Schlüsselmanagement, Hebetechnik und temporäre Sicherheitskonzepte.',
+    image: '/images/leistung8.png',
+    icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+  },
+];
+
+const schemaBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Startseite',
+      item: 'https://www.metra-baulogistik.de',
+    },
+  ],
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout 
+  title="METRA Baulogistik & Projektsteuerung GmbH | Organisation · Effizienz · Kontrolle"
+  description="Als verlängerter Arm der Bauleitung koordinieren wir sämtliche logistischen Abläufe – für reibungslose Prozesse und lückenlose Dokumentation. 24/7 Verfügbarkeit. 100% Dokumentation."
+  canonical="/"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(schemaBreadcrumb)} />
+  
+  <Header />
+  
+  <main id="main-content">
+    <!-- Hero Section WITH IMAGE -->
+    <section 
+      class="relative min-h-[90vh] flex items-center overflow-hidden"
+      aria-labelledby="hero-title"
+    >
+      <!-- Background Pattern -->
+      <div class="absolute inset-0 opacity-5" aria-hidden="true">
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+      </div>
+      
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <!-- Left: Text Content -->
+          <div class="max-w-2xl">
+            <!-- Tagline -->
+            <p class="text-accent font-semibold tracking-wider text-sm md:text-base mb-4 animate-fade-in">
+              BAULOGISTIK & PROJEKTSTEUERUNG
+            </p>
+            
+            <!-- Main Headline -->
+            <h1 
+              id="hero-title" 
+              class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in-up"
+            >
+              Organisation · Effizienz · Kontrolle
+            </h1>
+            
+            <!-- Subheadline -->
+            <p class="text-lg md:text-xl text-secondary leading-relaxed mb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
+              Als verlängerter Arm der Bauleitung koordinieren wir sämtliche logistischen Abläufe – für reibungslose Prozesse und lückenlose Dokumentation.
+            </p>
+            
+            <!-- USP Tags -->
+            <div class="flex flex-wrap gap-3 mb-10 animate-fade-in-up" style="animation-delay: 0.2s;">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-sm font-medium">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                </svg>
+                24/7 Verfügbarkeit
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-sm font-medium">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                100% Dokumentation
+              </span>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up" style="animation-delay: 0.3s;">
+              <a 
+                href="/kontakt"
+                class="inline-flex items-center justify-center px-8 py-4 bg-accent text-background font-bold text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+                aria-label="Jetzt unverbindliches Angebot anfordern"
+              >
+                Angebot anfordern
+                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+              <a 
+                href="/leistungen"
+                class="inline-flex items-center justify-center px-8 py-4 border-2 border-secondary/30 text-white font-semibold text-base rounded hover:border-accent hover:text-accent transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+                aria-label="Alle Leistungen ansehen"
+              >
+                Leistungen entdecken
+              </a>
+            </div>
+          </div>
+          
+          <!-- Right: Hero Image -->
+          <div class="relative lg:h-[600px] flex items-center justify-center animate-fade-in-up" style="animation-delay: 0.2s;">
+            {/* Decorative Glow */}
+            <div class="absolute inset-0 bg-accent/5 rounded-full blur-3xl" aria-hidden="true"></div>
+            
+            {/* Hero Image */}
+            <div class="relative w-full">
+              <img 
+                src="/images/hero.png" 
+                alt="METRA Baulogistik - Professionelle Baustellenkoordination"
+                class="w-full h-auto object-contain rounded-2xl shadow-2xl"
+                width="700"
+                height="240"
+                loading="eager"
+                fetchpriority="high"
+              />
+              
+              {/* Floating Stats Card */}
+              <div class="absolute -bottom-6 -left-6 bg-background border border-accent/20 rounded-xl p-4 shadow-xl">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-white font-bold text-lg">100%</p>
+                    <p class="text-secondary text-xs">Zuverlässigkeit</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating 24/7 Card */}
+              <div class="absolute -top-4 -right-4 bg-accent text-background rounded-xl p-4 shadow-xl">
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="font-bold text-sm">24/7 Service</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Scroll Indicator */}
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block" aria-hidden="true">
+        <div class="w-6 h-10 border-2 border-secondary/30 rounded-full flex justify-center pt-2">
+          <div class="w-1.5 h-3 bg-accent rounded-full animate-bounce"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Problem / Solution Section -->
+    <section class="py-20 md:py-32 bg-black/20" aria-labelledby="problem-solution-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div>
+            <h2 id="problem-solution-title" class="sr-only">Problem und Lösung</h2>
+            <p class="text-accent font-semibold tracking-wider text-sm mb-3">DIE HERAUSFORDERUNG</p>
+            <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">
+              Baustellenchaos kostet Zeit und Geld
+            </h3>
+            <p class="text-secondary text-lg mb-6">
+              Verzögerte Lieferungen, blockierte Zufahrten, fehlende Koordination – jeder Stillstand kostet. Ohne professionelle Baulogistik laufen Projekte schnell aus dem Ruder.
+            </p>
+            <ul class="space-y-3 text-secondary">
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span>Unkoordinierte Lieferungen verursachen Verzögerungen</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span>Fehlende Dokumentation führt zu Streitigkeiten</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg class="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span>Überlastete Bauleitung kann nicht alles koordinieren</span>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="bg-background border border-accent/20 rounded-2xl p-8 md:p-10">
+            <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSERE LÖSUNG</p>
+            <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">
+              Ein Partner. Eine Verantwortung. Eine Lösung.
+            </h3>
+            <p class="text-secondary text-lg mb-8">
+              METRA übernimmt die komplette Baulogistik für Ihr Projekt. Von der Zufahrtssteuerung bis zur Dokumentation – wir sorgen für reibungslose Abläufe.
+            </p>
+            
+            <!-- Benefits Grid -->
+            <div class="grid sm:grid-cols-2 gap-4">
+              {benefits.map((benefit, index) => (
+                <div class="flex items-start gap-3 p-4 bg-white/5 rounded-lg">
+                  <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={benefit.icon}/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 class="text-white font-semibold text-sm mb-1">{benefit.title}</h4>
+                    <p class="text-secondary text-xs leading-relaxed">{benefit.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4-Step Process -->
+    <section class="py-20 md:py-32" aria-labelledby="process-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSER ANSATZ</p>
+          <h2 id="process-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Unser 4-Schritte-Ansatz
+          </h2>
+          <p class="text-secondary text-lg">
+            Systematisch und professionell zum Erfolg – von der ersten Analyse bis zur finalen Dokumentation.
+          </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step, index) => (
+            <article class="group relative bg-white/5 border border-white/5 rounded-xl p-6 hover:border-accent/30 transition-colors">
+              <span class="absolute -top-3 -right-3 w-12 h-12 bg-accent text-background font-bold text-lg rounded-full flex items-center justify-center">
+                {step.number}
+              </span>
+              <div class="w-14 h-14 bg-accent/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+                <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon}/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-white mb-2">{step.title}</h3>
+              <p class="text-secondary text-sm leading-relaxed">{step.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Teaser WITH IMAGES -->
+    <section class="py-20 md:py-32 bg-black/20" aria-labelledby="services-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSERE LEISTUNGEN</p>
+          <h2 id="services-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Komplette Baulogistik aus einer Hand
+          </h2>
+          <p class="text-secondary text-lg">
+            Von der Zufahrtssteuerung bis zur Dokumentation – wir decken alle Bereiche der Baustellenlogistik ab.
+          </p>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service) => (
+            <a 
+              href="/leistungen"
+              class="group block bg-background border border-white/5 rounded-xl overflow-hidden hover:border-accent/30 transition-all hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+            >
+              <!-- Service Image -->
+              <div class="relative aspect-[16/9] overflow-hidden">
+                <img 
+                  src={service.image} 
+                  alt={service.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  width="400"
+                  height="225"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60"></div>
+              </div>
+              
+              <div class="p-6">
+                <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+                  <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.icon}/>
+                  </svg>
+                </div>
+                <h3 class="text-lg font-bold text-white mb-2 group-hover:text-accent transition-colors">
+                  {service.title}
+                </h3>
+                <p class="text-secondary text-sm leading-relaxed mb-4">
+                  {service.description}
+                </p>
+                <span class="inline-flex items-center text-accent text-sm font-medium">
+                  Mehr erfahren
+                  <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+        
+        <div class="text-center mt-12">
+          <a 
+            href="/leistungen"
+            class="inline-flex items-center justify-center px-8 py-4 border-2 border-accent text-accent font-semibold text-base rounded hover:bg-accent hover:text-background transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+            aria-label="Alle Leistungen im Detail ansehen"
+          >
+            Alle Leistungen ansehen
+            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+  
+  <Footer />
+  <WhatsAppButton />
+</Layout>
