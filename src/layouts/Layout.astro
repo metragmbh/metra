@@ -12,7 +12,7 @@ interface Props {
 const { 
   title = 'METRA Baulogistik & Projektsteuerung GmbH | Organisation · Effizienz · Kontrolle',
   description = 'Als verlängerter Arm der Bauleitung koordinieren wir sämtliche logistischen Abläufe – für reibungslose Prozesse und lückenlose Dokumentation. 24/7 Verfügbarkeit.',
-  ogImage = '/images/og-image.jpg',
+  ogImage = '/images/hero.webp',
   canonical = Astro.url.pathname
 } = Astro.props;
 
@@ -25,7 +25,7 @@ const organizationSchema = {
   '@type': 'Organization',
   name: 'METRA Baulogistik & Projektsteuerung GmbH',
   url: siteUrl,
-  logo: `${siteUrl}/images/logo.svg`,
+  logo: `${siteUrl}/images/logo2.webp`,
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Im Mediapark 5',
@@ -87,7 +87,7 @@ const localBusinessSchema = {
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
     
     <!-- Preconnect für Performance -->
     <link rel="preconnect" href="https://api.web3forms.com" />
