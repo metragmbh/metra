@@ -8,7 +8,7 @@ const services = [
   {
     id: 'zufahrtssteuerung',
     title: 'Zufahrts- und Liefersteuerung',
-    description: 'Steuerung von Zufahrten und Lieferungen für reibungslosen Baustellenverkehr.',
+    description: 'Organisation und Koordination von Zufahrten und Lieferungen für einen strukturierten Baustellenverkehr.',
     image: '/images/leistung1.webp',
     features: [
       'Koordination aller Baustellenzufahrten',
@@ -21,7 +21,7 @@ const services = [
   {
     id: 'materialfluss',
     title: 'Material- und Personalflusskoordination',
-    description: 'Koordination von Material und Personal für optimale Ressourcennutzung.',
+    description: 'Koordination von Materiallieferungen und Personaleinsätzen für strukturierte Abläufe auf der Baustelle.',
     image: '/images/leistung2.webp',
     features: [
       'Just-in-Time Materialbereitstellung',
@@ -34,7 +34,7 @@ const services = [
   {
     id: 'baustellenorganisation',
     title: 'Baustellenorganisation und Ablaufsteuerung',
-    description: 'Organisation und Ablaufsteuerung der Baustelle von der Planung bis zur Übergabe.',
+    description: 'Organisation und Strukturierung der Baustellenabläufe – von der Planung bis zur Übergabe.',
     image: '/images/leistung3.webp',
     features: [
       'Gesamtkoordination der Baustellenaktivitäten',
@@ -60,7 +60,7 @@ const services = [
   {
     id: 'bauleitungsunterstuetzung',
     title: 'Unterstützung der Bauleitung vor Ort',
-    description: 'Als verlängerter Arm der Bauleitung vor Ort – operative Unterstützung.',
+    description: 'Unterstützung der Bauleitung bei der Organisation und Koordination der Baustellenabläufe.',
     image: '/images/leistung5.webp',
     features: [
       'Vertretung der Bauleitung vor Ort',
@@ -86,20 +86,20 @@ const services = [
   {
     id: 'baustellensicherheit',
     title: 'Integrierte Baustellensicherheit',
-    description: 'Sicherheitsleistungen logistisch mitgedacht und nahtlos integriert.',
+    description: 'Sicherheitsleistungen erfolgen in Zusammenarbeit mit METRA Sicherheitsdienste.',
     image: '/images/leistung7.webp',
     features: [
       'Baustellenüberwachung und Zugangskontrollen',
       'Objektschutz während Bauphasen',
       'Brandwachen und sicherheitsrelevante Präsenz',
-      'Koordination externer Sicherheitsdienste',
+      'Koordination interner Sicherheitsdienste',
     ],
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
   },
   {
     id: 'unterstuetzende-services',
     title: 'Unterstützende Services',
-    description: 'Schlüsselmanagement, Hebetechnik und temporäre Sicherheitskonzepte.',
+    description: 'Ergänzende Leistungen zur Unterstützung der Baustellenorganisation.',
     image: '/images/leistung8.webp',
     features: [
       'Schlüssel- und Zugangsmanagement',
@@ -131,6 +131,11 @@ const benefits = [
     title: 'Praxisorientierte Lösungen',
     description: 'Unsere Konzepte orientieren sich an realen Baustellenabläufen.',
     icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+  },
+  {
+    title: 'Logistik und Baustellensicherheit aus einer Hand',
+    description: 'Durch die Zusammenarbeit mit METRA Sicherheitsdienste optimal abgestimmt.',
+    icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
   },
   {
     title: 'Flexible Einsatzplanung',
@@ -247,9 +252,16 @@ const schemaService = {
                   />
                   <div class="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
                   
-                  {/* Number Badge */}
-                  <div class="absolute top-4 left-4 w-14 h-14 bg-accent text-background font-bold text-xl rounded-full flex items-center justify-center shadow-lg">
-                    {String(index + 1).padStart(2, '0')}
+                  {/* Service Icon */}
+                  <div class="absolute top-4 left-4 w-14 h-14 bg-accent text-background rounded-full flex items-center justify-center shadow-lg text-2xl">
+                    {index === 0 && '🚚'}
+                    {index === 1 && '📦'}
+                    {index === 2 && '🏗'}
+                    {index === 3 && '🤝'}
+                    {index === 4 && '👷'}
+                    {index === 5 && '📋'}
+                    {index === 6 && '🛡'}
+                    {index === 7 && '🔧'}
                   </div>
                 </div>
                 

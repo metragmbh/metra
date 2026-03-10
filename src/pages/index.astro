@@ -62,19 +62,19 @@ const steps = [
 const services = [
   {
     title: 'Zufahrts- und Liefersteuerung',
-    description: 'Steuerung von Zufahrten und Lieferungen für reibungslosen Baustellenverkehr.',
+    description: 'Organisation und Koordination von Zufahrten und Lieferungen für einen strukturierten Baustellenverkehr.',
     image: '/images/leistung1.webp',
     icon: 'M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0',
   },
   {
     title: 'Material- und Personalflusskoordination',
-    description: 'Koordination von Material und Personal für optimale Ressourcennutzung.',
+    description: 'Koordination von Materiallieferungen und Personaleinsätzen für strukturierte Abläufe auf der Baustelle.',
     image: '/images/leistung2.webp',
     icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10',
   },
   {
     title: 'Baustellenorganisation',
-    description: 'Organisation und Ablaufsteuerung der Baustelle von der Planung bis zur Übergabe.',
+    description: 'Organisation und Strukturierung der Baustellenabläufe – von der Planung bis zur Übergabe.',
     image: '/images/leistung3.webp',
     icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4',
   },
@@ -86,7 +86,7 @@ const services = [
   },
   {
     title: 'Unterstützung der Bauleitung',
-    description: 'Als verlängerter Arm der Bauleitung vor Ort – operative Unterstützung.',
+    description: 'Unterstützung der Bauleitung bei der Organisation und Koordination der Baustellenabläufe.',
     image: '/images/leistung5.webp',
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
   },
@@ -98,13 +98,13 @@ const services = [
   },
   {
     title: 'Integrierte Baustellensicherheit',
-    description: 'Sicherheitsleistungen logistisch mitgedacht und nahtlos integriert.',
+    description: 'Sicherheitsleistungen erfolgen in Zusammenarbeit mit METRA Sicherheitsdienste.',
     image: '/images/leistung7.webp',
     icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
   },
   {
     title: 'Unterstützende Services',
-    description: 'Schlüsselmanagement, Hebetechnik und temporäre Sicherheitskonzepte.',
+    description: 'Ergänzende Leistungen zur Unterstützung der Baustellenorganisation.',
     image: '/images/leistung8.webp',
     icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
   },
@@ -144,7 +144,7 @@ const schemaBreadcrumb = {
         <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
       </div>
       
-      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-40">
         <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <!-- Left: Text Content -->
           <div class="max-w-2xl">
@@ -153,17 +153,27 @@ const schemaBreadcrumb = {
               BAULOGISTIK & PROJEKTSTEUERUNG
             </p>
             
+            <!-- Claim -->
+            <p class="text-accent/80 text-sm md:text-base mb-2 animate-fade-in">
+              Sicherheit & Struktur – auf die Sie bauen können.
+            </p>
+            
             <!-- Main Headline -->
             <h1 
               id="hero-title" 
               class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 animate-fade-in-up"
             >
-              Organisation · Effizienz · Kontrolle
+              Baulogistik & Projektsteuerung für strukturierte Baustellen
             </h1>
             
             <!-- Subheadline -->
-            <p class="text-lg md:text-xl text-secondary leading-relaxed mb-8 animate-fade-in-up" style="animation-delay: 0.1s;">
-              Als verlängerter Arm der Bauleitung koordinieren wir sämtliche logistischen Abläufe – für reibungslose Prozesse und lückenlose Dokumentation.
+            <p class="text-lg md:text-xl text-secondary leading-relaxed mb-4 animate-fade-in-up" style="animation-delay: 0.1s;">
+              Wir organisieren die Baustellenlogistik und koordinieren Lieferungen, Materialflüsse und Abläufe auf Ihrer Baustelle.
+            </p>
+            
+            <!-- Cooperation Note -->
+            <p class="text-accent font-medium mb-8 animate-fade-in-up" style="animation-delay: 0.15s;">
+              In Zusammenarbeit mit METRA Sicherheitsdienste
             </p>
             
             <!-- USP Tags -->
@@ -187,9 +197,9 @@ const schemaBreadcrumb = {
               <a 
                 href="/kontakt"
                 class="inline-flex items-center justify-center px-8 py-4 bg-accent text-background font-bold text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
-                aria-label="Jetzt unverbindliches Angebot anfordern"
+                aria-label="Jetzt Projekt anfragen"
               >
-                Angebot anfordern
+                Projekt anfragen
                 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                 </svg>
@@ -199,7 +209,7 @@ const schemaBreadcrumb = {
                 class="inline-flex items-center justify-center px-8 py-4 border-2 border-secondary/30 text-white font-semibold text-base rounded hover:border-accent hover:text-accent transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
                 aria-label="Alle Leistungen ansehen"
               >
-                Leistungen entdecken
+                Leistungen ansehen
               </a>
             </div>
           </div>
@@ -260,38 +270,21 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- Problem / Solution Section -->
-    <section class="py-20 md:py-32 bg-black/20" aria-labelledby="problem-solution-title">
+    <section class="py-24 md:py-40 bg-black/20" aria-labelledby="problem-solution-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div>
             <h2 id="problem-solution-title" class="sr-only">Problem und Lösung</h2>
             <p class="text-accent font-semibold tracking-wider text-sm mb-3">DIE HERAUSFORDERUNG</p>
             <h3 class="text-3xl md:text-4xl font-bold text-white mb-6">
-              Baustellenchaos kostet Zeit und Geld
+              Logistische Herausforderungen auf Baustellen
             </h3>
             <p class="text-secondary text-lg mb-6">
-              Verzögerte Lieferungen, blockierte Zufahrten, fehlende Koordination – jeder Stillstand kostet. Ohne professionelle Baulogistik laufen Projekte schnell aus dem Ruder.
+              Viele Baustellen stehen vor logistischen Herausforderungen wie unkoordinierten Lieferungen, blockierten Zufahrten oder fehlender Abstimmung zwischen Gewerken.
             </p>
-            <ul class="space-y-3 text-secondary">
-              <li class="flex items-start gap-3">
-                <svg class="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <span>Unkoordinierte Lieferungen verursachen Verzögerungen</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <span>Fehlende Dokumentation führt zu Streitigkeiten</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <svg class="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                <span>Überlastete Bauleitung kann nicht alles koordinieren</span>
-              </li>
-            </ul>
+            <p class="text-secondary text-lg">
+              Eine strukturierte Baulogistik hilft, Abläufe zu organisieren und die Bauleitung zu entlasten.
+            </p>
           </div>
           
           <div class="bg-background border border-accent/20 rounded-2xl p-8 md:p-10">
@@ -325,7 +318,7 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- 4-Step Process -->
-    <section class="py-20 md:py-32" aria-labelledby="process-title">
+    <section class="py-24 md:py-40" aria-labelledby="process-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
           <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSER ANSATZ</p>
@@ -357,7 +350,7 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- Services Teaser WITH IMAGES -->
-    <section class="py-20 md:py-32 bg-black/20" aria-labelledby="services-title">
+    <section class="py-24 md:py-40 bg-black/20" aria-labelledby="services-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-16">
           <p class="text-accent font-semibold tracking-wider text-sm mb-3">UNSERE LEISTUNGEN</p>
@@ -426,6 +419,79 @@ const schemaBreadcrumb = {
       </div>
     </section>
 
+    <!-- Logistik und Baustellensicherheit Section -->
+    <section class="py-24 md:py-40 bg-black/40" aria-labelledby="security-section-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+          <!-- Shield Icon -->
+          <div class="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-8">
+            <span class="text-4xl">🛡</span>
+          </div>
+          
+          <h2 id="security-section-title" class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-8">
+            Logistik und Baustellensicherheit<br />aus einer Hand
+          </h2>
+          
+          <p class="text-secondary text-lg md:text-xl mb-12 max-w-3xl mx-auto">
+            Durch die Zusammenarbeit mit METRA Sicherheitsdienste können logistische Abläufe und Sicherheitskonzepte auf der Baustelle optimal miteinander abgestimmt werden.
+          </p>
+          
+          <div class="grid md:grid-cols-3 gap-6 text-left">
+            <div class="flex items-start gap-3 bg-white/5 p-6 rounded-xl">
+              <span class="text-accent text-xl mt-0.5">✔</span>
+              <span class="text-white">abgestimmte Logistik- und Sicherheitsabläufe</span>
+            </div>
+            <div class="flex items-start gap-3 bg-white/5 p-6 rounded-xl">
+              <span class="text-accent text-xl mt-0.5">✔</span>
+              <span class="text-white">klare Zuständigkeiten auf der Baustelle</span>
+            </div>
+            <div class="flex items-start gap-3 bg-white/5 p-6 rounded-xl">
+              <span class="text-accent text-xl mt-0.5">✔</span>
+              <span class="text-white">strukturierte Organisation von Lieferungen und Zugängen</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Warum METRA Section -->
+    <section class="py-24 md:py-40 bg-black/20" aria-labelledby="why-metra-title">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <h2 id="why-metra-title" class="text-3xl md:text-4xl font-bold text-white mb-4">
+            Warum METRA Baulogistik
+          </h2>
+          <p class="text-accent text-lg">Sicherheit & Struktur – auf die Sie bauen können.</p>
+        </div>
+        
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">Entlastung der Bauleitung</span>
+          </div>
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">Strukturierte Baustellenorganisation</span>
+          </div>
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">Koordination von Lieferungen und Materialflüssen</span>
+          </div>
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">Lückenlose Dokumentation</span>
+          </div>
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">Logistik und Baustellensicherheit aus einer Hand</span>
+          </div>
+          <div class="flex items-start gap-4 bg-white/5 p-6 rounded-xl">
+            <span class="text-accent text-2xl">✔</span>
+            <span class="text-white text-lg">24/7 Erreichbarkeit</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
   </main>
   
