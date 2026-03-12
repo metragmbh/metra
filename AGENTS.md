@@ -13,9 +13,9 @@ This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**,
 - **German-language** business website for the construction/logistics industry
 - **Dark theme** design with yellow accent color (#fdf153)
 - **Mobile-first responsive** design
-- **WCAG accessibility** compliant (ARIA labels, semantic HTML, keyboard navigation)
-- **SEO-optimized** with Schema.org structured data, meta tags, Open Graph
-- **Cookie consent** banner implemented (localStorage-based)
+- **WCAG accessibility** compliant (ARIA labels, semantic HTML, keyboard navigation, reduced motion support)
+- **SEO-optimized** with Schema.org structured data, meta tags, Open Graph, Twitter Cards
+- **Cookie consent** banner implemented (localStorage-based, GDPR-compliant)
 - **Contact form** via Web3Forms (requires access key configuration)
 - **WhatsApp integration** for direct messaging
 
@@ -30,6 +30,7 @@ This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**,
 | Deployment | Netlify | static hosting |
 | Form Handling | Web3Forms | external API |
 | Font | Inter | self-hosted woff2 |
+| Image Optimization | Sharp | ^0.34.5 |
 
 ## Project Structure
 
@@ -38,30 +39,32 @@ This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**,
 ├── src/
 │   ├── components/          # Reusable Astro components
 │   │   ├── CookieBanner.astro    # GDPR cookie consent
-│   │   ├── Footer.astro          # Site footer
-│   │   ├── Header.astro          # Navigation header
+│   │   ├── Footer.astro          # Site footer with links
+│   │   ├── Header.astro          # Navigation header with mobile menu
 │   │   └── WhatsAppButton.astro  # Floating WhatsApp CTA
 │   ├── layouts/
-│   │   └── Layout.astro          # Base HTML layout with SEO
+│   │   └── Layout.astro          # Base HTML layout with SEO, Schema.org
 │   ├── pages/               # File-based routing
-│   │   ├── index.astro           # Homepage
-│   │   ├── leistungen.astro      # Services page
-│   │   ├── kontakt.astro         # Contact page with form
+│   │   ├── index.astro           # Homepage (Hero, Services teaser, Process, CTA)
+│   │   ├── leistungen.astro      # Services page (detailed)
+│   │   ├── kontakt.astro         # Contact page with Web3Forms
 │   │   ├── datenschutz.astro     # Privacy policy (DSGVO)
-│   │   └── impressum.astro       # Legal imprint
+│   │   └── impressum.astro       # Legal imprint (§ 5 TMG)
 │   └── styles/
-│       └── global.css            # Tailwind imports + custom styles
+│       └── global.css            # Tailwind imports + custom styles + fonts
 ├── public/                  # Static assets
-│   ├── fonts/               # Self-hosted Inter font files
-│   ├── images/              # PNG images (logo, hero, services)
+│   ├── fonts/               # Self-hosted Inter font files (regular, 600, 700)
+│   ├── images/              # WebP images (logo, hero, 8 service images)
 │   ├── favicon.ico
-│   └── favicon.svg
-├── .vscode/                 # VS Code settings
-├── astro.config.mjs         # Astro configuration
-├── tailwind.config.js       # Tailwind customization
-├── postcss.config.js        # PostCSS plugins
+│   ├── favicon.svg
+│   ├── robots.txt
+│   └── sitemap.xml
+├── .vscode/                 # VS Code settings (extensions.json, launch.json)
+├── astro.config.mjs         # Astro configuration (static output, Sharp)
+├── tailwind.config.js       # Tailwind customization (colors, fonts, animations)
+├── postcss.config.js        # PostCSS plugins (Tailwind + autoprefixer)
 ├── tsconfig.json            # TypeScript strict config
-├── netlify.toml             # Netlify deployment & headers
+├── netlify.toml             # Netlify deployment & security headers
 └── package.json
 ```
 
@@ -74,7 +77,7 @@ npm install
 # Development server (localhost:4321)
 npm run dev
 
-# Production build
+# Production build (outputs to ./dist/)
 npm run build
 
 # Preview production build locally
@@ -89,8 +92,9 @@ npm run astro -- --help
 ### Astro Config (`astro.config.mjs`)
 
 - **Output**: Static site generation (`output: 'static'`)
+- **Dev Toolbar**: Disabled (`devToolbar: { enabled: false }`)
 - **Image optimization**: Sharp service enabled
-- **HTML compression**: Enabled
+- **HTML compression**: Enabled (`compressHTML: true`)
 - **Build format**: Directory-based
 
 ### Tailwind Config (`tailwind.config.js`)
@@ -99,109 +103,125 @@ Custom theme extensions:
 
 ```javascript
 // Colors
-background: '#17181d',    // Dark background
-accent: '#fdf153',        // Yellow accent
-secondary: '#d2d1d9',     // Light gray text
+background: '#17181d',     // Dark background
+accent: '#fdf153',         // Yellow accent (brand color)
+secondary: '#d2d1d9',      // Light gray text
 'accent-hover': '#e5d94a', // Darker yellow
 
 // Font Family
-sans: ['Inter', 'system-ui', ...]
+sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
 
 // Animations
-'fade-in': fade-in 0.6s ease-out
-'fade-in-up': fade-in-up 0.6s ease-out
+'fade-in': fadeIn 0.6s ease-out
+'fade-in-up': fadeInUp 0.6s ease-out
 ```
 
 ### Netlify Config (`netlify.toml`)
 
 - **Build command**: `npm run build`
 - **Publish directory**: `dist`
-- **Security headers**: Cache-Control, X-Frame-Options, CSP, etc.
-- **CSP** allows connections to `https://api.web3forms.com`
+- **Security headers**: 
+  - Cache-Control (1 year for static assets)
+  - X-Frame-Options: DENY
+  - X-Content-Type-Options: nosniff
+  - Referrer-Policy: strict-origin-when-cross-origin
+  - Content-Security-Policy (CSP) with Web3Forms API allowance
 
 ## Code Style Guidelines
 
 ### Astro Components
 
-1. **Frontmatter first**: Use TypeScript in frontmatter for data
+1. **Frontmatter first**: Use TypeScript in frontmatter for data definitions
 2. **Props interfaces**: Define explicit interfaces for component props
 3. **Semantic HTML**: Use proper heading hierarchy, landmarks, ARIA labels
 4. **Accessibility**:
    - All interactive elements must have `aria-label` or visible text
    - Use `focus-visible` classes for keyboard navigation
-   - Skip links for main content
-   - Reduced motion media query support
+   - Skip links for main content (`#main-content`)
+   - Reduced motion media query support in global.css
 
 ### CSS/Styling
 
 1. **Tailwind-first**: Use utility classes; avoid custom CSS when possible
 2. **Custom properties**: Use Tailwind theme values, not hardcoded colors
-3. **Responsive prefix**: Mobile-first (`sm:`, `md:`, `lg:`)
+3. **Responsive prefix**: Mobile-first (`sm:`, `md:`, `lg:`, `xl:`)
 4. **Dark theme**: Site is permanently dark; no light mode toggle
+5. **Custom scrollbar**: Styled with yellow accent on hover
 
-### JavaScript
+### JavaScript/TypeScript
 
-1. **TypeScript**: Use type annotations in scripts
+1. **TypeScript**: Use type annotations in scripts (strict config)
 2. **IIFE pattern**: Wrap client scripts in IIFEs to avoid global scope
 3. **Null checks**: Use optional chaining (`?.`) for DOM elements
-4. **Event listeners**: Always clean up if component unmounts (rare in Astro)
+4. **Event listeners**: Clean up when appropriate (rare in Astro static sites)
 
 ### Naming Conventions
 
 - **Components**: PascalCase (e.g., `CookieBanner.astro`)
 - **Variables**: camelCase (e.g., `contactInfo`)
-- **Constants**: UPPER_SNAKE_CASE for true constants
+- **Constants**: UPPER_SNAKE_CASE for true constants (e.g., `WEB3FORMS_ENDPOINT`)
 - **Files**: kebab-case for pages, PascalCase for components
-- **German content**: Use German for all user-facing text
+- **German content**: All user-facing text is in German
 
 ## Key Components
 
 ### Layout.astro
 
 Base layout providing:
-- HTML5 boilerplate with German lang attribute (`de-DE`)
+- HTML5 boilerplate with German lang attribute (`lang="de-DE"`)
 - Meta tags (SEO, Open Graph, Twitter Cards)
-- Schema.org JSON-LD (Organization + LocalBusiness)
-- Font preloading
-- Critical CSS inline
+- Schema.org JSON-LD (Organization + LocalBusiness structured data)
+- Self-hosted Inter font preloading
+- Critical CSS inline for above-the-fold content
 - Cookie banner inclusion
+- Skip-to-content accessibility link
 
 ### Header.astro
 
 - Fixed position navigation with backdrop blur
+- Company logo with tagline claim
+- Desktop navigation with active link highlighting
 - Mobile hamburger menu with slide-out drawer
-- Active link highlighting based on current path
-- Skip-to-content link for accessibility
+- CTA button "Angebot anfordern"
+- ARIA attributes for accessibility
+
+### Footer.astro
+
+- 4-column layout (Company info, Services, Company links, Contact)
+- Contact information with phone/email/WhatsApp
+- Legal links (Impressum, Datenschutz)
+- Disclaimer notice about security services
 
 ### CookieBanner.astro
 
-- GDPR-compliant cookie consent
-- Stores preference in localStorage (`metra_cookie_consent`)
+- Fixed bottom banner with GDPR-compliant cookie consent
 - Three options: Accept All, Decline, Essential Only
-- Dispatches custom event on acceptance
+- Stores preference in localStorage (`metra_cookie_consent`)
+- Dispatches custom event on acceptance for potential analytics
+- Hidden by default, slides up after 1s delay if no consent found
 
 ### WhatsAppButton.astro
 
 - Fixed floating button (bottom-right)
 - Pulse animation on hover
-- Adjusts position when cookie banner is visible
+- Links to WhatsApp with company phone number
 
 ## Pages
 
 | Route | File | Purpose |
 |-------|------|---------|
-| `/` | `index.astro` | Homepage with hero, services teaser, process, CTA |
-| `/leistungen` | `leistungen.astro` | Detailed service descriptions |
-| `/kontakt` | `kontakt.astro` | Contact form, info, map placeholder |
-| `/impressum` | `impressum.astro` | Legal imprint (§ 5 TMG) |
-| `/datenschutz` | `datenschutz.astro` | Privacy policy (DSGVO) |
+| `/` | `index.astro` | Homepage with hero, services teaser, 4-step process, CTA sections |
+| `/leistungen` | `leistungen.astro` | Detailed services page with 8 service descriptions |
+| `/kontakt` | `kontakt.astro` | Contact form (Web3Forms), contact info, WhatsApp link |
+| `/impressum` | `impressum.astro` | Legal imprint (§ 5 TMG) with company details |
+| `/datenschutz` | `datenschutz.astro` | Privacy policy (DSGVO compliant) |
 
 ## Contact Form Setup
 
 The contact form uses **Web3Forms** (configured in `kontakt.astro`):
 
 ```typescript
-const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Replace this!
+const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Must be replaced!
 ```
 
 **To configure:**
@@ -210,11 +230,12 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Replace this!
 3. Replace `YOUR_ACCESS_KEY` in `src/pages/kontakt.astro`
 
 **Features:**
-- Honeypot field for bot protection
-- Client-side validation
-- Loading states
-- Success/error messages
+- Honeypot field (`botcheck`) for bot protection
+- Client-side validation (required fields)
+- Loading states during submission
+- Success/error message display
 - Privacy checkbox (required)
+- Reply-to email auto-population
 
 ## Testing Checklist
 
@@ -222,7 +243,7 @@ Before deploying changes, verify:
 
 - [ ] All pages render without errors (`npm run build`)
 - [ ] Responsive design works on mobile, tablet, desktop
-- [ ] Navigation works (including mobile menu)
+- [ ] Navigation works (including mobile menu toggle)
 - [ ] Contact form submits correctly (test with Web3Forms)
 - [ ] Cookie banner appears for new users
 - [ ] WhatsApp button opens correct chat
@@ -248,30 +269,31 @@ Before deploying changes, verify:
 
 1. **CSP Headers**: Configured in `netlify.toml`
    - Default src: 'self'
-   - Scripts: 'self' + 'unsafe-inline' (required for Astro)
-   - Connect: allows Web3Forms API
+   - Scripts: 'self' + 'unsafe-inline' (required for Astro islands)
+   - Connect: allows Web3Forms API (`https://api.web3forms.com`)
 
 2. **Form Security**:
-   - Honeypot field (`botcheck`) must remain empty
+   - Honeypot field (`botcheck`) must remain empty for submission
    - Client-side validation only; server validates at Web3Forms
 
 3. **No sensitive data** in repository (no API keys, credentials)
 
 ## Performance Optimizations
 
-- Static site generation (no server runtime)
+- Static site generation (no server runtime needed)
 - Self-hosted fonts with `font-display: swap`
 - Image optimization via Sharp
 - HTML compression enabled
 - Preconnect to Web3Forms API
-- Prefetch critical resources
+- Long-term caching headers for static assets (1 year)
+- Lazy loading for below-the-fold images
 
 ## Common Issues
 
 ### Web3Forms not working
-- Verify access key is set correctly
+- Verify access key is set correctly (not 'YOUR_ACCESS_KEY')
 - Check browser console for network errors
-- Ensure `api.web3forms.com` is reachable
+- Ensure `api.web3forms.com` is reachable from user's location
 
 ### Cookie banner not showing
 - Clear localStorage key `metra_cookie_consent`
@@ -279,20 +301,28 @@ Before deploying changes, verify:
 
 ### Styles not updating
 - Restart dev server (Tailwind JIT mode cache)
-- Check `tailwind.config.js` content paths
+- Check `tailwind.config.js` content paths include your files
 
 ## External Dependencies
 
 | Service | Purpose | URL |
 |---------|---------|-----|
 | Web3Forms | Contact form handling | https://api.web3forms.com |
-| WhatsApp | Direct messaging | https://wa.me/... |
+| WhatsApp | Direct messaging | https://wa.me/491708888891 |
 | Netlify | Hosting & CDN | https://www.netlify.com |
+
+## Company Information
+
+- **Name**: METRA Baulogistik & Projektsteuerung GmbH
+- **Owner**: Sascha Trajkovic
+- **Address**: Im Mediapark 5, 50670 Köln, Germany
+- **Phone**: 0170 888 88 91
+- **Email**: info@metra-baulogistik.de
+- **Website**: https://www.metra-baulogistik.de
 
 ## License & Legal
 
 - Website content: © METRA Baulogistik & Projektsteuerung GmbH
-- Company address: Im Mediapark 5, 50670 Köln, Germany
 - This is proprietary code for the company's website
 
 ---
