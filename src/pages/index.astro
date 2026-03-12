@@ -155,7 +155,7 @@ const schemaBreadcrumb = {
       <div class="relative max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-16 sm:py-24 md:py-32 lg:py-40">
         <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
           <!-- Left: Text Content -->
-          <div class="max-w-2xl order-2 lg:order-1">
+          <div class="max-w-2xl order-1">
             <!-- Tagline -->
             <p class="text-accent font-semibold tracking-wider text-sm md:text-base mb-3 sm:mb-4 animate-fade-in">
               BAULOGISTIK & PROJEKTSTEUERUNG
@@ -185,7 +185,7 @@ const schemaBreadcrumb = {
             </p>
             
             <!-- USP Tags -->
-            <div class="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-10 animate-fade-in-up" style="animation-delay: 0.2s;">
+            <div class="flex flex-wrap gap-2 sm:gap-3 mb-0 animate-fade-in-up" style="animation-delay: 0.2s;">
               <span class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-accent/10 border border-accent/20 rounded-full text-accent text-xs sm:text-sm font-medium">
                 <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
@@ -199,9 +199,59 @@ const schemaBreadcrumb = {
                 100% Dokumentation
               </span>
             </div>
+          </div>
+          
+          <!-- Right: Hero Image -->
+          <div class="relative order-2 lg:order-2 animate-fade-in-up" style="animation-delay: 0.2s;">
+            {/* Decorative Glow */}
+            <div class="absolute inset-0 bg-accent/5 rounded-full blur-3xl scale-110" aria-hidden="true"></div>
             
-            <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 animate-fade-in-up" style="animation-delay: 0.3s;">
+            {/* Hero Image Container */}
+            <div class="relative w-full">
+              <div class="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-[500px] xl:h-[550px] rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src="/images/hero.webp" 
+                  alt="METRA Baulogistik - Professionelle Baustellenkoordination"
+                  class="w-full h-full object-cover object-top"
+                  width="700"
+                  height="525"
+                  loading="eager"
+                  fetchpriority="high"
+                />
+              </div>
+              
+              {/* 24/7 Badge - Top Left (All Devices) */}
+              <div class="absolute top-3 left-3 sm:top-4 sm:left-4 bg-accent text-background rounded-xl p-2.5 sm:p-3 shadow-xl">
+                <div class="flex items-center gap-1.5 sm:gap-2">
+                  <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                  </svg>
+                  <span class="font-bold text-xs sm:text-sm">24/7 Service</span>
+                </div>
+              </div>
+              
+              {/* 100% Badge - Bottom Right (All Devices) */}
+              <div class="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-background border border-accent/20 rounded-xl p-2 sm:p-3 shadow-xl">
+                <div class="flex items-center gap-2 sm:gap-3">
+                  <div class="w-8 h-8 sm:w-10 sm:h-10 bg-accent/10 rounded-lg flex items-center justify-center">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="text-white font-bold text-sm sm:text-base">100%</p>
+                    <p class="text-secondary text-[10px] sm:text-xs">Zuverlässigkeit</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* CTA Buttons - Below Hero on Mobile, Same row on Desktop */}
+        <div class="mt-8 lg:mt-0 lg:absolute lg:bottom-0 lg:left-0 lg:right-0 lg:pointer-events-none">
+          <div class="max-w-2xl lg:max-w-none lg:px-0 animate-fade-in-up" style="animation-delay: 0.3s;">
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:hidden">
               <a 
                 href="/kontakt"
                 class="inline-flex items-center justify-center px-4 sm:px-8 py-3.5 sm:py-4 bg-accent text-background font-bold text-sm sm:text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
@@ -220,75 +270,26 @@ const schemaBreadcrumb = {
                 Leistungen ansehen
               </a>
             </div>
-
-            {/* Mobile: Stats Cards unter den Buttons */}
-            <div class="flex flex-col sm:flex-row gap-3 mt-6 sm:mt-8 lg:hidden animate-fade-in-up" style="animation-delay: 0.4s;">
-              {/* 24/7 Card */}
-              <div class="inline-flex items-center justify-center gap-2 bg-accent text-background rounded-xl px-4 py-3 shadow-lg">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                </svg>
-                <span class="font-bold text-sm">24/7 Service</span>
-              </div>
-              
-              {/* Stats Card */}
-              <div class="inline-flex items-center justify-center gap-3 bg-background border border-accent/20 rounded-xl px-4 py-3 shadow-lg">
-                <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
-                  <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-white font-bold text-base">100%</p>
-                  <p class="text-secondary text-xs">Zuverlässigkeit</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Right: Hero Image -->
-          <div class="relative order-1 lg:order-2 animate-fade-in-up" style="animation-delay: 0.2s;">
-            {/* Decorative Glow */}
-            <div class="absolute inset-0 bg-accent/5 rounded-full blur-3xl scale-110" aria-hidden="true"></div>
             
-            {/* Hero Image Container */}
-            <div class="relative w-full">
-              <div class="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-[500px] xl:h-[550px] rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src="/images/hero.webp" 
-                  alt="METRA Baulogistik - Professionelle Baustellenkoordination"
-                  class="w-full h-full object-cover object-top"
-                  width="700"
-                  height="525"
-                  loading="eager"
-                  fetchpriority="high"
-                />
-              </div>
-              
-              {/* Desktop: Floating Stats Card - positioniert unten links, nicht über dem Gesicht */}
-              <div class="hidden lg:block absolute -bottom-4 -left-4 xl:-bottom-6 xl:-left-6 bg-background border border-accent/20 rounded-xl p-3 xl:p-4 shadow-xl">
-                <div class="flex items-center gap-2 xl:gap-3">
-                  <div class="w-10 h-10 xl:w-12 xl:h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-                    <svg class="w-5 h-5 xl:w-6 xl:h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="text-white font-bold text-base xl:text-lg">100%</p>
-                    <p class="text-secondary text-xs">Zuverlässigkeit</p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Desktop: Floating 24/7 Card - positioniert unten rechts */}
-              <div class="hidden lg:block absolute -bottom-4 -right-4 xl:-bottom-6 xl:-right-6 bg-accent text-background rounded-xl p-3 xl:p-4 shadow-xl">
-                <div class="flex items-center gap-2">
-                  <svg class="w-4 h-4 xl:w-5 xl:h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                  </svg>
-                  <span class="font-bold text-xs xl:text-sm">24/7 Service</span>
-                </div>
-              </div>
+            {/* Desktop CTA Buttons - Inside text column */}
+            <div class="hidden lg:flex flex-col sm:flex-row gap-3 sm:gap-4 pointer-events-auto">
+              <a 
+                href="/kontakt"
+                class="inline-flex items-center justify-center px-4 sm:px-8 py-3.5 sm:py-4 bg-accent text-background font-bold text-sm sm:text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+                aria-label="Jetzt Projekt anfragen"
+              >
+                Projekt anfragen
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                </svg>
+              </a>
+              <a 
+                href="/leistungen"
+                class="inline-flex items-center justify-center px-4 sm:px-8 py-3.5 sm:py-4 border-2 border-secondary/30 text-white font-semibold text-sm sm:text-base rounded hover:border-accent hover:text-accent transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+                aria-label="Alle Leistungen ansehen"
+              >
+                Leistungen ansehen
+              </a>
             </div>
           </div>
         </div>
