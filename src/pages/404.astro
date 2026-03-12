@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "404 - Seite nicht gefunden | METRA Baulogistik";
+const description = "Die angeforderte Seite konnte nicht gefunden werden. Kehren Sie zur Startseite zurück oder kontaktieren Sie uns direkt.";
+---
+
+<Layout title={title} description={description} canonical="/404">
+  <Header />
+  
+  <main id="main-content" class="flex-grow flex items-center justify-center py-20 md:py-32">
+    <div class="text-center max-w-2xl mx-auto px-4 sm:px-6">
+      <span class="text-7xl sm:text-8xl md:text-9xl font-bold text-accent/20">404</span>
+      <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-4 mb-4">
+        Seite nicht gefunden
+      </h1>
+      <p class="text-secondary text-base sm:text-lg mb-8 max-w-md mx-auto">
+        Die von Ihnen angeforderte Seite existiert leider nicht oder wurde verschoben.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="/"
+          class="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 bg-accent text-background font-bold text-sm sm:text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          Zurück zur Startseite
+        </a>
+        <a 
+          href="/kontakt"
+          class="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 border-2 border-secondary/30 text-white font-semibold text-sm sm:text-base rounded hover:border-accent hover:text-accent transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 0 002 2z"/>
+          </svg>
+          Kontakt aufnehmen
+        </a>
+      </div>
+      
+      <!-- Helpful Links -->
+      <div class="mt-12 pt-8 border-t border-white/10">
+        <p class="text-secondary text-sm mb-4">Oder besuchen Sie eine dieser Seiten:</p>
+        <nav aria-label="Hilfreiche Links">
+          <ul class="flex flex-wrap justify-center gap-3 sm:gap-4">
+            <li>
+              <a href="/leistungen" class="text-accent hover:underline text-sm sm:text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded px-1">
+                Leistungen
+              </a>
+            </li>
+            <li class="text-secondary">•</li>
+            <li>
+              <a href="tel:01708888891" class="text-accent hover:underline text-sm sm:text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded px-1">
+                0170 888 88 91
+              </a>
+            </li>
+            <li class="text-secondary hidden sm:inline">•</li>
+            <li>
+              <a href="/datenschutz" class="text-accent hover:underline text-sm sm:text-base focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded px-1">
+                Datenschutz
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>

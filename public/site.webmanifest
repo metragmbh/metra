@@ -1,0 +1,22 @@
+{
+  "name": "METRA Baulogistik & Projektsteuerung GmbH",
+  "short_name": "METRA",
+  "description": "Baulogistik & Projektsteuerung für strukturierte Baustellen. 24/7 Verfügbarkeit. Organisation · Effizienz · Kontrolle.",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#17181d",
+  "background_color": "#17181d",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
+}

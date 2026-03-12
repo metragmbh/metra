@@ -6,7 +6,7 @@
 
 ## Project Overview
 
-This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**, a construction logistics and project management company based in Cologne, Germany. The website is a static, SEO-optimized, accessible single-page application (SPA) feel with multiple routes.
+This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**, a construction logistics and project management company based in Cologne, Germany. The website is a static, SEO-optimized, accessible multi-page site.
 
 ### Key Characteristics
 
@@ -46,23 +46,25 @@ This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**,
 │   │   └── Layout.astro          # Base HTML layout with SEO, Schema.org
 │   ├── pages/               # File-based routing
 │   │   ├── index.astro           # Homepage (Hero, Services teaser, Process, CTA)
-│   │   ├── leistungen.astro      # Services page (detailed)
+│   │   ├── leistungen.astro      # Services page (8 detailed services)
 │   │   ├── kontakt.astro         # Contact page with Web3Forms
 │   │   ├── datenschutz.astro     # Privacy policy (DSGVO)
 │   │   └── impressum.astro       # Legal imprint (§ 5 TMG)
 │   └── styles/
 │       └── global.css            # Tailwind imports + custom styles + fonts
 ├── public/                  # Static assets
-│   ├── fonts/               # Self-hosted Inter font files (regular, 600, 700)
+│   ├── fonts/               # Self-hosted Inter font (regular, 600, 700)
 │   ├── images/              # WebP images (logo, hero, 8 service images)
 │   ├── favicon.ico
 │   ├── favicon.svg
 │   ├── robots.txt
 │   └── sitemap.xml
-├── .vscode/                 # VS Code settings (extensions.json, launch.json)
-├── astro.config.mjs         # Astro configuration (static output, Sharp)
-├── tailwind.config.js       # Tailwind customization (colors, fonts, animations)
-├── postcss.config.js        # PostCSS plugins (Tailwind + autoprefixer)
+├── .vscode/                 # VS Code settings
+│   ├── extensions.json      # Recommended: astro-build.astro-vscode
+│   └── launch.json          # Debug config for dev server
+├── astro.config.mjs         # Astro configuration
+├── tailwind.config.js       # Tailwind customization
+├── postcss.config.js        # PostCSS plugins
 ├── tsconfig.json            # TypeScript strict config
 ├── netlify.toml             # Netlify deployment & security headers
 └── package.json
@@ -91,11 +93,21 @@ npm run astro -- --help
 
 ### Astro Config (`astro.config.mjs`)
 
-- **Output**: Static site generation (`output: 'static'`)
-- **Dev Toolbar**: Disabled (`devToolbar: { enabled: false }`)
-- **Image optimization**: Sharp service enabled
-- **HTML compression**: Enabled (`compressHTML: true`)
-- **Build format**: Directory-based
+```javascript
+{
+  // Dev Toolbar disabled
+  devToolbar: { enabled: false },
+  // Static Site Generation
+  output: 'static',
+  // Image optimization via Sharp
+  image: {
+    service: { entrypoint: 'astro/assets/services/sharp' }
+  },
+  // HTML compression
+  compressHTML: true,
+  build: { format: 'directory' }
+}
+```
 
 ### Tailwind Config (`tailwind.config.js`)
 
@@ -112,15 +124,15 @@ secondary: '#d2d1d9',      // Light gray text
 sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
 
 // Animations
-'fade-in': fadeIn 0.6s ease-out
-'fade-in-up': fadeInUp 0.6s ease-out
+'fade-in': 'fadeIn 0.6s ease-out'
+'fade-in-up': 'fadeInUp 0.6s ease-out'
 ```
 
 ### Netlify Config (`netlify.toml`)
 
 - **Build command**: `npm run build`
 - **Publish directory**: `dist`
-- **Security headers**: 
+- **Security headers**:
   - Cache-Control (1 year for static assets)
   - X-Frame-Options: DENY
   - X-Content-Type-Options: nosniff
