@@ -105,7 +105,7 @@ const schemaContactPage = {
     </section>
 
     <!-- Contact Section -->
-    <section class="py-16 md:py-24 bg-black/20" aria-labelledby="contact-form-title">
+    <section class="py-16 md:py-24 bg-white/[0.02]" aria-labelledby="contact-form-title">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-5 gap-12 lg:gap-16">
           
@@ -262,7 +262,7 @@ const schemaContactPage = {
                     name="name"
                     required
                     autocomplete="name"
-                    class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-secondary/50 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
+                    class="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-lg text-white placeholder-secondary/50 focus:border-accent focus:ring-1 focus:ring-accent outline-none transition-colors"
                     placeholder="Ihr vollständiger Name"
                     aria-required="true"
                   />
@@ -335,7 +335,7 @@ const schemaContactPage = {
                 <button 
                   type="submit"
                   id="submit-btn"
-                  class="w-full inline-flex items-center justify-center px-8 py-4 bg-accent text-background font-bold text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="w-full inline-flex items-center justify-center px-8 py-4 bg-accent text-background font-bold text-base rounded hover:bg-accent-hover active:scale-[0.98] active:bg-accent-hover transition-all duration-150 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50 disabled:opacity-50 disabled:cursor-not-allowed"
                   aria-label="Nachricht senden"
                 >
                   <span id="btn-text">Nachricht senden</span>
@@ -436,12 +436,19 @@ const schemaContactPage = {
       if (successMessage) successMessage.classList.add('hidden');
       if (errorMessage) errorMessage.classList.add('hidden');
       
+      // Abort controller for timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+      
       try {
         const formData = new FormData(form);
         const response = await fetch(form.action, {
           method: 'POST',
           body: formData,
+          signal: controller.signal
         });
+        
+        clearTimeout(timeoutId);
         
         if (response.ok) {
           if (successMessage) successMessage.classList.remove('hidden');
@@ -451,6 +458,14 @@ const schemaContactPage = {
           throw new Error('Submission failed');
         }
       } catch (error) {
+        clearTimeout(timeoutId);
+        
+        // Show timeout-specific error
+        if (error.name === 'AbortError') {
+          const errorText = errorMessage?.querySelector('p:last-child');
+          if (errorText) errorText.textContent = 'Die Anfrage hat zu lange gedauert. Bitte versuchen Sie es später erneut oder kontaktieren Sie uns telefonisch.';
+        }
+        
         if (errorMessage) errorMessage.classList.remove('hidden');
         errorMessage?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } finally {

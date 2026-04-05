@@ -254,7 +254,7 @@ const schemaBreadcrumb = {
             <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:hidden">
               <a 
                 href="/kontakt"
-                class="inline-flex items-center justify-center px-4 sm:px-8 py-3.5 sm:py-4 bg-accent text-background font-bold text-sm sm:text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+                class="inline-flex items-center justify-center px-4 sm:px-8 py-3.5 sm:py-4 bg-accent text-background font-bold text-sm sm:text-base rounded hover:bg-accent-hover active:scale-[0.98] active:bg-accent-hover transition-all duration-150 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
                 aria-label="Jetzt Projekt anfragen"
               >
                 Projekt anfragen
@@ -275,7 +275,7 @@ const schemaBreadcrumb = {
             <div class="hidden lg:flex flex-col sm:flex-row gap-3 sm:gap-4 pointer-events-auto">
               <a 
                 href="/kontakt"
-                class="inline-flex items-center justify-center px-4 sm:px-8 py-3.5 sm:py-4 bg-accent text-background font-bold text-sm sm:text-base rounded hover:bg-accent-hover transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+                class="inline-flex items-center justify-center px-4 sm:px-8 py-3.5 sm:py-4 bg-accent text-background font-bold text-sm sm:text-base rounded hover:bg-accent-hover active:scale-[0.98] active:bg-accent-hover transition-all duration-150 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
                 aria-label="Jetzt Projekt anfragen"
               >
                 Projekt anfragen
@@ -304,7 +304,7 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- Problem / Solution Section -->
-    <section class="py-16 sm:py-24 md:py-40 bg-black/20" aria-labelledby="problem-solution-title">
+    <section class="py-16 sm:py-24 md:py-40 bg-white/[0.02]" aria-labelledby="problem-solution-title">
       <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div class="grid md:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
           <div>
@@ -333,7 +333,7 @@ const schemaBreadcrumb = {
             <!-- Benefits Grid -->
             <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
               {benefits.map((benefit, index) => (
-                <div class="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 bg-white/5 rounded-lg">
+                <div class="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 bg-white/[0.03] rounded-lg">
                   <div class="w-8 h-8 sm:w-10 sm:h-10 bg-accent/10 rounded-lg flex items-center justify-center flex-shrink-0">
                     <svg class="w-4 h-4 sm:w-5 sm:h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={benefit.icon}/>
@@ -366,7 +366,7 @@ const schemaBreadcrumb = {
         
         <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {steps.map((step, index) => (
-            <article class="group relative bg-white/5 border border-white/5 rounded-xl p-4 sm:p-6 hover:border-accent/30 transition-colors">
+            <article class="group relative bg-white/[0.03] border border-white/5 rounded-xl p-4 sm:p-6 hover:border-accent/30 transition-colors">
               <span class="absolute -top-2 -right-2 sm:-top-3 sm:-right-3 w-10 h-10 sm:w-12 sm:h-12 bg-accent text-background font-bold text-base sm:text-lg rounded-full flex items-center justify-center">
                 {step.number}
               </span>
@@ -384,7 +384,7 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- Services Teaser WITH IMAGES -->
-    <section class="py-16 sm:py-24 md:py-40 bg-black/20" aria-labelledby="services-title">
+    <section class="py-16 sm:py-24 md:py-40 bg-white/[0.02]" aria-labelledby="services-title">
       <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <p class="text-accent font-semibold tracking-wider text-xs sm:text-sm mb-2 sm:mb-3">UNSERE LEISTUNGEN</p>
@@ -403,7 +403,7 @@ const schemaBreadcrumb = {
               class="group block bg-background border border-white/5 rounded-xl overflow-hidden hover:border-accent/30 transition-all hover:-translate-y-1 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
             >
               <!-- Service Image -->
-              <div class="relative aspect-[16/9] overflow-hidden">
+              <div class="relative overflow-hidden" style="aspect-ratio: 16/9;">
                 <img 
                   src={service.image} 
                   alt={service.title}
@@ -441,7 +441,7 @@ const schemaBreadcrumb = {
         <div class="text-center mt-8 sm:mt-12">
           <a 
             href="/leistungen"
-            class="inline-flex items-center justify-center px-5 sm:px-8 py-3 sm:py-4 border-2 border-accent text-accent font-semibold text-sm sm:text-base rounded hover:bg-accent hover:text-background transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
+            class="inline-flex items-center justify-center px-5 sm:px-8 py-3 sm:py-4 border-2 border-accent text-accent font-semibold text-sm sm:text-base rounded hover:bg-accent hover:text-background active:scale-[0.98] transition-all duration-150 focus:outline-none focus-visible:ring-4 focus-visible:ring-accent/50"
             aria-label="Alle Leistungen im Detail ansehen"
           >
             Alle Leistungen ansehen
@@ -454,7 +454,7 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- Logistik und Baustellensicherheit Section -->
-    <section class="py-16 sm:py-24 md:py-40 bg-black/40" aria-labelledby="security-section-title">
+    <section class="py-16 sm:py-24 md:py-40 bg-white/[0.04]" aria-labelledby="security-section-title">
       <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div class="max-w-4xl mx-auto text-center">
           <!-- Shield Icon -->
@@ -473,19 +473,19 @@ const schemaBreadcrumb = {
           </p>
           
           <div class="grid md:grid-cols-3 gap-4 sm:gap-6 text-left">
-            <div class="flex items-start gap-3 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <div class="flex items-start gap-3 bg-white/[0.03] p-4 sm:p-6 rounded-xl">
               <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
               </svg>
               <span class="text-white text-sm sm:text-base">abgestimmte Logistik- und Sicherheitsabläufe</span>
             </div>
-            <div class="flex items-start gap-3 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <div class="flex items-start gap-3 bg-white/[0.03] p-4 sm:p-6 rounded-xl">
               <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
               </svg>
               <span class="text-white text-sm sm:text-base">klare Zuständigkeiten auf der Baustelle</span>
             </div>
-            <div class="flex items-start gap-3 bg-white/5 p-4 sm:p-6 rounded-xl">
+            <div class="flex items-start gap-3 bg-white/[0.03] p-4 sm:p-6 rounded-xl">
               <svg class="w-5 h-5 text-accent flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
               </svg>
@@ -497,7 +497,7 @@ const schemaBreadcrumb = {
     </section>
 
     <!-- Warum METRA Section -->
-    <section class="py-16 sm:py-24 md:py-40 bg-black/20" aria-labelledby="why-metra-title">
+    <section class="py-16 sm:py-24 md:py-40 bg-white/[0.02]" aria-labelledby="why-metra-title">
       <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <h2 id="why-metra-title" class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
@@ -507,37 +507,37 @@ const schemaBreadcrumb = {
         </div>
         
         <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 max-w-5xl mx-auto">
-          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/[0.03] p-4 sm:p-6 rounded-xl">
             <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
             <span class="text-white text-base sm:text-lg">Entlastung der Bauleitung</span>
           </div>
-          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/[0.03] p-4 sm:p-6 rounded-xl">
             <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
             <span class="text-white text-base sm:text-lg">Strukturierte Baustellenorganisation</span>
           </div>
-          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/[0.03] p-4 sm:p-6 rounded-xl">
             <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
             <span class="text-white text-base sm:text-lg">Koordination von Lieferungen und Materialflüssen</span>
           </div>
-          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/[0.03] p-4 sm:p-6 rounded-xl">
             <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
             <span class="text-white text-base sm:text-lg">Lückenlose Dokumentation</span>
           </div>
-          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/[0.03] p-4 sm:p-6 rounded-xl">
             <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
             <span class="text-white text-base sm:text-lg">Logistik und Baustellensicherheit aus einer Hand</span>
           </div>
-          <div class="flex items-start gap-3 sm:gap-4 bg-white/5 p-4 sm:p-6 rounded-xl">
+          <div class="flex items-start gap-3 sm:gap-4 bg-white/[0.03] p-4 sm:p-6 rounded-xl">
             <svg class="w-6 h-6 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>

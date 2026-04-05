@@ -1,23 +1,26 @@
 # METRA Baulogistik Website - Agent Documentation
 
-> **Language**: German (website content), English (code comments mixed with German)
-> **Framework**: Astro 5.x with Static Site Generation
-> **Styling**: Tailwind CSS 3.x
+> **Language**: German (website content), German comments mixed with English in code  
+> **Framework**: Astro 5.x with Static Site Generation  
+> **Styling**: Tailwind CSS 3.x  
+> **Deployment**: Netlify
 
 ## Project Overview
 
-This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**, a construction logistics and project management company based in Cologne, Germany. The website is a static, SEO-optimized, accessible multi-page site.
+This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**, a construction logistics and project management company based in Cologne, Germany. The website is a static, SEO-optimized, accessible multi-page site deployed on Netlify.
 
 ### Key Characteristics
 
 - **German-language** business website for the construction/logistics industry
-- **Dark theme** design with yellow accent color (#fdf153)
+- **Dark theme** design with gold accent color (#dab252)
 - **Mobile-first responsive** design
 - **WCAG accessibility** compliant (ARIA labels, semantic HTML, keyboard navigation, reduced motion support)
 - **SEO-optimized** with Schema.org structured data, meta tags, Open Graph, Twitter Cards
 - **Cookie consent** banner implemented (localStorage-based, GDPR-compliant)
 - **Contact form** via Web3Forms (requires access key configuration)
 - **WhatsApp integration** for direct messaging
+
+---
 
 ## Technology Stack
 
@@ -32,24 +35,27 @@ This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**,
 | Font | Inter | self-hosted woff2 |
 | Image Optimization | Sharp | ^0.34.5 |
 
+---
+
 ## Project Structure
 
 ```
 /
 ├── src/
 │   ├── components/          # Reusable Astro components
-│   │   ├── CookieBanner.astro    # GDPR cookie consent
-│   │   ├── Footer.astro          # Site footer with links
+│   │   ├── CookieBanner.astro    # GDPR cookie consent banner
+│   │   ├── Footer.astro          # Site footer with links & contact info
 │   │   ├── Header.astro          # Navigation header with mobile menu
-│   │   └── WhatsAppButton.astro  # Floating WhatsApp CTA
+│   │   └── WhatsAppButton.astro  # Floating WhatsApp CTA button
 │   ├── layouts/
 │   │   └── Layout.astro          # Base HTML layout with SEO, Schema.org
 │   ├── pages/               # File-based routing
 │   │   ├── index.astro           # Homepage (Hero, Services teaser, Process, CTA)
-│   │   ├── leistungen.astro      # Services page (8 detailed services)
-│   │   ├── kontakt.astro         # Contact page with Web3Forms
-│   │   ├── datenschutz.astro     # Privacy policy (DSGVO)
-│   │   └── impressum.astro       # Legal imprint (§ 5 TMG)
+│   │   ├── leistungen.astro      # Services page (8 detailed service sections)
+│   │   ├── kontakt.astro         # Contact page with Web3Forms form
+│   │   ├── datenschutz.astro     # Privacy policy (DSGVO compliant)
+│   │   ├── impressum.astro       # Legal imprint (§ 5 TMG)
+│   │   └── 404.astro             # Custom 404 error page
 │   └── styles/
 │       └── global.css            # Tailwind imports + custom styles + fonts
 ├── public/                  # Static assets
@@ -58,17 +64,20 @@ This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**,
 │   ├── favicon.ico
 │   ├── favicon.svg
 │   ├── robots.txt
-│   └── sitemap.xml
+│   ├── sitemap.xml
+│   └── site.webmanifest
 ├── .vscode/                 # VS Code settings
 │   ├── extensions.json      # Recommended: astro-build.astro-vscode
 │   └── launch.json          # Debug config for dev server
 ├── astro.config.mjs         # Astro configuration
-├── tailwind.config.js       # Tailwind customization
+├── tailwind.config.js       # Tailwind customization (colors, fonts, animations)
 ├── postcss.config.js        # PostCSS plugins
 ├── tsconfig.json            # TypeScript strict config
 ├── netlify.toml             # Netlify deployment & security headers
 └── package.json
 ```
+
+---
 
 ## Build Commands
 
@@ -88,6 +97,8 @@ npm run preview
 # Astro CLI commands
 npm run astro -- --help
 ```
+
+---
 
 ## Configuration Details
 
@@ -136,8 +147,13 @@ sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 
   - Cache-Control (1 year for static assets)
   - X-Frame-Options: DENY
   - X-Content-Type-Options: nosniff
+  - X-XSS-Protection: 1; mode=block
   - Referrer-Policy: strict-origin-when-cross-origin
+  - Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  - Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
   - Content-Security-Policy (CSP) with Web3Forms API allowance
+
+---
 
 ## Code Style Guidelines
 
@@ -175,6 +191,8 @@ sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 
 - **Files**: kebab-case for pages, PascalCase for components
 - **German content**: All user-facing text is in German
 
+---
+
 ## Key Components
 
 ### Layout.astro
@@ -196,6 +214,7 @@ Base layout providing:
 - Mobile hamburger menu with slide-out drawer
 - CTA button "Angebot anfordern"
 - ARIA attributes for accessibility
+- Client-side JavaScript for mobile menu toggle (IIFE pattern)
 
 ### Footer.astro
 
@@ -217,6 +236,9 @@ Base layout providing:
 - Fixed floating button (bottom-right)
 - Pulse animation on hover
 - Links to WhatsApp with company phone number
+- Notification dot indicator
+
+---
 
 ## Pages
 
@@ -227,6 +249,9 @@ Base layout providing:
 | `/kontakt` | `kontakt.astro` | Contact form (Web3Forms), contact info, WhatsApp link |
 | `/impressum` | `impressum.astro` | Legal imprint (§ 5 TMG) with company details |
 | `/datenschutz` | `datenschutz.astro` | Privacy policy (DSGVO compliant) |
+| `/404` | `404.astro` | Custom 404 error page |
+
+---
 
 ## Contact Form Setup
 
@@ -248,6 +273,9 @@ const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Must be replaced!
 - Success/error message display
 - Privacy checkbox (required)
 - Reply-to email auto-population
+- Form submission via fetch API with async handling
+
+---
 
 ## Testing Checklist
 
@@ -266,6 +294,8 @@ Before deploying changes, verify:
 - [ ] SEO: meta tags present on all pages
 - [ ] SEO: Schema.org data validates
 
+---
+
 ## Deployment
 
 **Platform**: Netlify
@@ -277,18 +307,23 @@ Before deploying changes, verify:
 
 **Environment variables:** None currently required (Web3Forms key is in code)
 
+---
+
 ## Security Considerations
 
 1. **CSP Headers**: Configured in `netlify.toml`
    - Default src: 'self'
    - Scripts: 'self' + 'unsafe-inline' (required for Astro islands)
    - Connect: allows Web3Forms API (`https://api.web3forms.com`)
+   - Form action: 'self' + `https://api.web3forms.com`
 
 2. **Form Security**:
    - Honeypot field (`botcheck`) must remain empty for submission
    - Client-side validation only; server validates at Web3Forms
 
-3. **No sensitive data** in repository (no API keys, credentials)
+3. **No sensitive data** in repository (no API keys, credentials except placeholder)
+
+---
 
 ## Performance Optimizations
 
@@ -299,6 +334,9 @@ Before deploying changes, verify:
 - Preconnect to Web3Forms API
 - Long-term caching headers for static assets (1 year)
 - Lazy loading for below-the-fold images
+- Critical CSS inline for above-the-fold content
+
+---
 
 ## Common Issues
 
@@ -315,6 +353,8 @@ Before deploying changes, verify:
 - Restart dev server (Tailwind JIT mode cache)
 - Check `tailwind.config.js` content paths include your files
 
+---
+
 ## External Dependencies
 
 | Service | Purpose | URL |
@@ -322,6 +362,8 @@ Before deploying changes, verify:
 | Web3Forms | Contact form handling | https://api.web3forms.com |
 | WhatsApp | Direct messaging | https://wa.me/491708888891 |
 | Netlify | Hosting & CDN | https://www.netlify.com |
+
+---
 
 ## Company Information
 
@@ -332,6 +374,8 @@ Before deploying changes, verify:
 - **Email**: info@metra-baulogistik.de
 - **Website**: https://www.metra-baulogistik.de
 
+---
+
 ## License & Legal
 
 - Website content: © METRA Baulogistik & Projektsteuerung GmbH
@@ -339,4 +383,4 @@ Before deploying changes, verify:
 
 ---
 
-Last updated: March 2026
+Last updated: April 2026

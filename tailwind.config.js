@@ -4,10 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#17181d',
-        accent: '#fdf153',
-        secondary: '#d2d1d9',
-        'accent-hover': '#e5d94a',
+        background: '#00002e',
+        accent: '#dab252',
+        secondary: '#c8c7cf',
+        'accent-hover': '#c9a14a',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
