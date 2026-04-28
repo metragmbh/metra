@@ -1,0 +1,209 @@
+---
+const navLinks = [
+  { href: '/', label: 'Startseite', ariaLabel: 'Zur Startseite' },
+  { href: '/leistungen', label: 'Leistungen', ariaLabel: 'Unsere Leistungen ansehen' },
+  { href: '/kontakt', label: 'Kontakt', ariaLabel: 'Kontakt aufnehmen' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="fixed top-0 left-0 right-0 z-40 bg-background/95 backdrop-blur-sm border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+    <div class="flex items-center justify-between h-20 sm:h-24 md:h-28 py-2">
+      <!-- Logo with Claim -->
+      <a 
+        href="/" 
+        class="flex flex-col items-start focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded py-1 sm:py-2"
+        aria-label="METRA Baulogistik - Zur Startseite"
+      >
+        <img 
+          src="/images/logoneu.png" 
+          alt="" 
+          width="220"
+          height="56"
+          class="h-9 sm:h-11 md:h-14 w-auto object-contain"
+        />
+        <span class="text-accent/80 text-[10px] sm:text-xs md:text-sm mt-0.5 sm:mt-1 hidden sm:block pb-1">Sicherheit & Struktur – auf die Sie bauen können.</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:block" aria-label="Hauptnavigation">
+        <ul class="flex items-center gap-8">
+          {navLinks.map((link) => {
+            const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+            return (
+              <li>
+                <a 
+                  href={link.href}
+                  class={`relative py-2 text-sm font-medium transition-colors hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded px-1 ${
+                    isActive ? 'text-accent' : 'text-white'
+                  }`}
+                  aria-label={link.ariaLabel}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {link.label}
+                  {isActive && (
+                    <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-accent rounded-full" aria-hidden="true" />
+                  )}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <!-- CTA Button Desktop -->
+      <a 
+        href="/kontakt"
+        class="hidden md:inline-flex items-center px-5 py-2.5 bg-accent text-background font-semibold text-sm rounded hover:bg-accent-hover active:scale-[0.98] active:bg-accent-hover transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        aria-label="Jetzt Angebot anfordern"
+      >
+        Angebot anfordern
+      </a>
+
+      <!-- Mobile Menu Button -->
+      <button 
+        id="mobile-menu-btn"
+        class="md:hidden p-3 min-w-[44px] min-h-[44px] text-white hover:text-accent transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded flex items-center justify-center"
+        aria-label="Menü öffnen"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg 
+          id="menu-icon-open" 
+          class="w-5 h-5 sm:w-6 sm:h-6" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24" 
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg 
+          id="menu-icon-close" 
+          class="w-5 h-5 sm:w-6 sm:h-6 hidden" 
+          fill="none" 
+          stroke="currentColor" 
+          viewBox="0 0 24 24" 
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div 
+    id="mobile-menu" 
+    class="md:hidden hidden bg-background border-t border-white/5 max-h-[calc(100vh-5rem)] overflow-y-auto"
+    aria-label="Mobile Navigation"
+  >
+    <nav class="px-3 sm:px-4 py-4">
+      <ul class="space-y-2">
+        {navLinks.map((link) => {
+          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+          return (
+            <li>
+              <a 
+                href={link.href}
+                class={`block py-3 px-4 rounded font-medium transition-colors ${
+                  isActive 
+                    ? 'bg-accent/10 text-accent' 
+                    : 'text-white hover:bg-white/5 hover:text-accent'
+                }`}
+                aria-label={link.ariaLabel}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <div class="mt-4 pt-4 border-t border-white/5">
+        <a 
+          href="/kontakt"
+          class="block w-full text-center py-3 bg-accent text-background font-semibold rounded hover:bg-accent-hover active:scale-[0.98] active:bg-accent-hover transition-all duration-150"
+          aria-label="Jetzt Angebot anfordern"
+        >
+          Angebot anfordern
+        </a>
+      </div>
+    </nav>
+  </div>
+  
+  <noscript>
+    <style>
+      @media (max-width: 767px) {
+        #mobile-menu { display: block !important; position: static; max-height: none; border: none; margin-top: 1rem; }
+        #mobile-menu-btn { display: none !important; }
+        header + div[aria-hidden="true"] { display: none !important; }
+      }
+    </style>
+  </noscript>
+</header>
+
+<!-- Spacer für fixed Header -->
+<div class="h-24 md:h-28" aria-hidden="true"></div>
+
+<script>
+  (function() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('menu-icon-open');
+    const iconClose = document.getElementById('menu-icon-close');
+    let isOpen = false;
+
+    function toggleMenu() {
+      isOpen = !isOpen;
+      
+      if (isOpen) {
+        mobileMenu?.classList.remove('hidden');
+        iconOpen?.classList.add('hidden');
+        iconClose?.classList.remove('hidden');
+        menuBtn?.setAttribute('aria-expanded', 'true');
+        menuBtn?.setAttribute('aria-label', 'Menü schließen');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileMenu?.classList.add('hidden');
+        iconOpen?.classList.remove('hidden');
+        iconClose?.classList.add('hidden');
+        menuBtn?.setAttribute('aria-expanded', 'false');
+        menuBtn?.setAttribute('aria-label', 'Menü öffnen');
+        document.body.style.overflow = '';
+      }
+    }
+
+    menuBtn?.addEventListener('click', toggleMenu);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) {
+        toggleMenu();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768 && isOpen) {
+        toggleMenu();
+      }
+    });
+
+    // Focus trap for mobile menu
+    const focusableElements = mobileMenu?.querySelectorAll<HTMLElement>('a[href], button');
+    const firstFocusable = focusableElements?.[0];
+    const lastFocusable = focusableElements?.[focusableElements.length - 1];
+
+    mobileMenu?.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key !== 'Tab' || !isOpen) return;
+      if (e.shiftKey && document.activeElement === firstFocusable) {
+        e.preventDefault();
+        lastFocusable?.focus();
+      } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+        e.preventDefault();
+        firstFocusable?.focus();
+      }
+    });
+  })();
+</script>
