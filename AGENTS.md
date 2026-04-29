@@ -1,6 +1,6 @@
 # METRA Baulogistik Website - Agent Documentation
 
-> **Language**: German (website content), mixed German/English in code comments  
+> **Language**: German (website content), mixed German/English in code comments and agent docs  
 > **Framework**: Astro 5.x with Static Site Generation  
 > **Styling**: Tailwind CSS 3.x  
 > **Deployment**: Netlify
@@ -15,10 +15,11 @@ This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**,
 - **Dark theme** design with gold accent color (`#dab252`)
 - **Mobile-first responsive** design
 - **WCAG accessibility** compliant (ARIA labels, semantic HTML, keyboard navigation, reduced motion support)
-- **SEO-optimized** with Schema.org structured data, meta tags, Open Graph, Twitter Cards
+- **SEO-optimized** with Schema.org structured data, meta tags, Open Graph, Twitter Cards, sitemap.xml, robots.txt
 - **Cookie consent** banner implemented (localStorage-based, GDPR-compliant)
-- **Contact form** via Web3Forms (requires access key configuration)
+- **Contact form** via Web3Forms (requires access key configuration before deployment)
 - **WhatsApp integration** for direct messaging
+- **No automated test suite** — testing is performed manually
 
 ---
 
@@ -32,7 +33,7 @@ This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**,
 | Type System | TypeScript (via Astro) | strict config |
 | Deployment | Netlify | static hosting |
 | Form Handling | Web3Forms | external API |
-| Font | Inter | self-hosted woff2 |
+| Font | Inter | self-hosted woff2 (regular, 600, 700) |
 | Image Optimization | Sharp | ^0.34.5 |
 
 ---
@@ -59,7 +60,7 @@ This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**,
 │   └── styles/
 │       └── global.css            # Tailwind imports + custom styles + fonts
 ├── public/                  # Static assets
-│   ├── fonts/               # Self-hosted Inter font (regular, 600, 700)
+│   ├── fonts/               # Self-hosted Inter font (regular, 600, 700 woff2)
 │   ├── images/              # WebP images (logo, hero, 8 service images)
 │   ├── favicon.svg
 │   ├── robots.txt
@@ -70,7 +71,7 @@ This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**,
 │   └── launch.json          # Debug config for dev server
 ├── astro.config.mjs         # Astro configuration
 ├── tailwind.config.js       # Tailwind customization (colors, fonts, animations)
-├── postcss.config.js        # PostCSS plugins
+├── postcss.config.js        # PostCSS plugins (tailwindcss, autoprefixer)
 ├── tsconfig.json            # TypeScript strict config
 ├── netlify.toml             # Netlify deployment & security headers
 └── package.json
@@ -106,7 +107,7 @@ npm run astro -- --help
 - **Dev Toolbar**: disabled
 - **Output**: `static` (Static Site Generation)
 - **Image optimization**: Sharp via `astro/assets/services/sharp`
-- **HTML compression**: enabled
+- **HTML compression**: enabled (`compressHTML: true`)
 - **Build format**: directory
 
 ### Tailwind Config (`tailwind.config.js`)
@@ -127,6 +128,19 @@ sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 
 'fade-in': 'fadeIn 0.6s ease-out'
 'fade-in-up': 'fadeInUp 0.6s ease-out'
 ```
+
+Content paths: `./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}`
+
+### PostCSS Config (`postcss.config.js`)
+
+- tailwindcss
+- autoprefixer
+
+### TypeScript Config (`tsconfig.json`)
+
+- Extends `astro/tsconfigs/strict`
+- Includes `.astro/types.d.ts`
+- Excludes `dist`
 
 ### Netlify Config (`netlify.toml`)
 
@@ -204,6 +218,8 @@ Base layout providing:
 - CTA button "Angebot anfordern"
 - ARIA attributes for accessibility
 - Client-side JavaScript for mobile menu toggle (IIFE pattern)
+- Focus trap for mobile menu
+- Noscript fallback for mobile menu
 
 ### Footer.astro
 
@@ -239,6 +255,12 @@ Base layout providing:
 | `/datenschutz` | `datenschutz.astro` | Privacy policy (DSGVO compliant) |
 | `/404` | `404.astro` | Custom 404 error page |
 
+Each page includes:
+- Individual `<Layout>` with page-specific title, description, canonical
+- Schema.org BreadcrumbList JSON-LD
+- Page-specific Schema.org structured data where applicable
+- `<Header />`, `<Footer />`, `<WhatsAppButton />` imports (not included in Layout)
+
 ---
 
 ## Contact Form Setup
@@ -246,7 +268,8 @@ Base layout providing:
 The contact form uses **Web3Forms** (configured in `kontakt.astro`):
 
 ```typescript
-const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY'; // Must be replaced!
+// ⚠️ DEPLOYMENT BLOCKER: Replace with your actual Web3Forms access key before going live.
+const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY';
 ```
 
 **To configure:**
@@ -296,7 +319,13 @@ This project does **not** include an automated test suite. Testing is performed 
 - Build command: `npm run build`
 - Output directory: `dist`
 
-**Environment variables:** None currently required (Web3Forms key is in code)
+**Environment variables:** None currently required (Web3Forms key is hardcoded as a placeholder)
+
+**Pre-deployment checklist:**
+- [ ] Replace `YOUR_ACCESS_KEY` with real Web3Forms key in `kontakt.astro`
+- [ ] Replace placeholder USt-IdNr. in `impressum.astro`
+- [ ] Replace placeholder Handelsregisternummer in `impressum.astro`
+- [ ] Update `sitemap.xml` dates if content changed significantly
 
 ---
 
@@ -326,6 +355,7 @@ This project does **not** include an automated test suite. Testing is performed 
 - Long-term caching headers for static assets (1 year)
 - Lazy loading for below-the-fold images
 - Critical CSS inline for above-the-fold content
+- `fetchpriority="high"` on hero image
 
 ---
 
