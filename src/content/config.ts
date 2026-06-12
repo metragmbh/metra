@@ -249,7 +249,7 @@ const datenschutzCollection = defineCollection({
 });
 
 const seitenCollection = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     slug: z.string().optional(),
     title: z.string(),
