@@ -2,9 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { getEntry } from 'astro:content';
 
-const title = "404 - Seite nicht gefunden | METRA Baulogistik";
-const description = "Die angeforderte Seite konnte nicht gefunden werden. Kehren Sie zur Startseite zurück oder kontaktieren Sie uns direkt.";
+const page404 = await getEntry('seiten', '404');
+const p = page404?.data;
+
+const title = p?.title || "404 - Seite nicht gefunden | METRA Baulogistik";
+const description = p?.description || "Die angeforderte Seite konnte nicht gefunden werden.";
 ---
 
 <Layout title={title} description={description} canonical="/404">
@@ -15,10 +19,10 @@ const description = "Die angeforderte Seite konnte nicht gefunden werden. Kehren
     <div class="text-center max-w-2xl mx-auto px-4 sm:px-6">
       <span class="text-7xl sm:text-8xl md:text-9xl font-bold text-accent/20">404</span>
       <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-4 mb-4">
-        Seite nicht gefunden
+        {p?.heading || 'Seite nicht gefunden'}
       </h1>
       <p class="text-secondary text-base sm:text-lg mb-8 max-w-md mx-auto">
-        Die von Ihnen angeforderte Seite existiert leider nicht oder wurde verschoben.
+        {p?.text || 'Die von Ihnen angeforderte Seite existiert leider nicht oder wurde verschoben.'}
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a 

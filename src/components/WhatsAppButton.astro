@@ -1,5 +1,8 @@
 ---
-const phoneNumber = '491738888378';
+import { getEntry } from 'astro:content';
+
+const settings = await getEntry('settings', 'global');
+const phoneNumber = settings?.data?.company?.whatsapp || '491738888378';
 ---
 
 <a 

@@ -1,0 +1,420 @@
+backend:
+  name: git-gateway
+  branch: master
+
+local_backend: true
+
+media_folder: "public/images"
+public_folder: "/images"
+
+# Netlify Identity
+site_url: https://www.metra-baulogistik.de
+display_url: https://www.metra-baulogistik.de
+logo_url: /images/logoneu.png
+
+# Editor
+editor:
+  preview: false
+
+collections:
+  # ═══════════════════════════════════════
+  # 1. GLOBALE EINSTELLUNGEN (Singleton)
+  # ═══════════════════════════════════════
+  - name: "settings"
+    label: "⚙️ Globale Einstellungen"
+    folder: "src/content/settings"
+    create: false
+    delete: false
+    slug: "global"
+    extension: "md"
+    fields:
+      - label: "Firmeninformationen"
+        name: "company"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Firmenname", name: "name", widget: "string" }
+          - { label: "Rechtsform", name: "legalForm", widget: "string", required: false }
+          - { label: "Geschäftsführer", name: "owner", widget: "string" }
+          - { label: "Straße", name: "street", widget: "string" }
+          - { label: "PLZ", name: "zip", widget: "string" }
+          - { label: "Stadt", name: "city", widget: "string" }
+          - { label: "Land", name: "country", widget: "string" }
+          - { label: "Telefon (Anzeige)", name: "phoneDisplay", widget: "string" }
+          - { label: "Telefon (Raw für Links)", name: "phoneRaw", widget: "string" }
+          - { label: "Telefon (International)", name: "phoneIntl", widget: "string" }
+          - { label: "WhatsApp-Nummer", name: "whatsapp", widget: "string" }
+          - { label: "E-Mail", name: "email", widget: "string" }
+          - { label: "Website", name: "web", widget: "string" }
+          - { label: "USt-IdNr.", name: "vatId", widget: "string" }
+          - { label: "Handelsregister", name: "registration", widget: "string" }
+          - { label: "Registergericht", name: "registryCourt", widget: "string" }
+          - { label: "Datenschutzbeauftragter", name: "dsb", widget: "string", required: false }
+          - { label: "DSB E-Mail", name: "dsbEmail", widget: "string", required: false }
+
+      - label: "Navigation"
+        name: "navigation"
+        widget: "list"
+        collapsed: true
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "URL", name: "href", widget: "string" }
+          - { label: "ARIA-Label", name: "ariaLabel", widget: "string" }
+
+      - label: "Footer"
+        name: "footer"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Claim", name: "claim", widget: "string" }
+          - { label: "Disclaimer", name: "disclaimer", widget: "text" }
+          - label: "Service-Links"
+            name: "serviceLinks"
+            widget: "list"
+            collapsed: true
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "href", widget: "string" }
+          - label: "Unternehmen-Links"
+            name: "companyLinks"
+            widget: "list"
+            collapsed: true
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "href", widget: "string" }
+
+      - label: "Cookie-Banner"
+        name: "cookieBanner"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Beschreibung", name: "description", widget: "text" }
+          - { label: "Link-Text", name: "linkText", widget: "string" }
+          - { label: "Button: Alle akzeptieren", name: "acceptLabel", widget: "string" }
+          - { label: "Button: Ablehnen", name: "declineLabel", widget: "string" }
+          - { label: "Button: Nur Essenzielle", name: "essentialLabel", widget: "string" }
+
+      - label: "SEO Defaults"
+        name: "seo"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Default Titel", name: "defaultTitle", widget: "string" }
+          - { label: "Default Beschreibung", name: "defaultDescription", widget: "text" }
+          - { label: "OG Image", name: "ogImage", widget: "image", required: false }
+          - { label: "Site URL", name: "siteUrl", widget: "string" }
+
+  # ═══════════════════════════════════════
+  # 2. STARTSEITE (Singleton)
+  # ═══════════════════════════════════════
+  - name: "homepage"
+    label: "🏠 Startseite"
+    folder: "src/content/homepage"
+    create: false
+    delete: false
+    slug: "index"
+    extension: "md"
+    fields:
+      - label: "Meta"
+        name: "meta"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Beschreibung", name: "description", widget: "text" }
+
+      - label: "Hero"
+        name: "hero"
+        widget: "object"
+        collapsed: false
+        fields:
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Claim", name: "claim", widget: "string" }
+          - { label: "Hauptüberschrift", name: "title", widget: "string" }
+          - { label: "Unterüberschrift", name: "subtitle", widget: "text" }
+          - { label: "USP 1", name: "usp1", widget: "string" }
+          - { label: "USP 2", name: "usp2", widget: "string" }
+          - { label: "Bild", name: "image", widget: "image" }
+          - { label: "Bild-Alt", name: "imageAlt", widget: "string" }
+          - { label: "Badge 1 Text", name: "badge1Text", widget: "string" }
+          - { label: "Badge 1 Label", name: "badge1Label", widget: "string" }
+          - { label: "Badge 2 Text", name: "badge2Text", widget: "string" }
+          - { label: "Badge 2 Label", name: "badge2Label", widget: "string" }
+          - label: "CTA Primary"
+            name: "ctaPrimary"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Text", name: "text", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "ARIA-Label", name: "ariaLabel", widget: "string" }
+          - label: "CTA Secondary"
+            name: "ctaSecondary"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Text", name: "text", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "ARIA-Label", name: "ariaLabel", widget: "string" }
+
+      - label: "Problem / Lösung"
+        name: "problemSolution"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Problem Label", name: "problemLabel", widget: "string" }
+          - { label: "Problem Titel", name: "problemTitle", widget: "string" }
+          - { label: "Problem Text 1", name: "problemText1", widget: "text" }
+          - { label: "Problem Text 2", name: "problemText2", widget: "text" }
+          - { label: "Lösung Label", name: "solutionLabel", widget: "string" }
+          - { label: "Lösung Titel", name: "solutionTitle", widget: "string" }
+          - { label: "Lösung Text", name: "solutionText", widget: "text" }
+          - label: "Benefits"
+            name: "benefits"
+            widget: "list"
+            collapsed: true
+            fields:
+              - { label: "Titel", name: "title", widget: "string" }
+              - { label: "Beschreibung", name: "description", widget: "text" }
+              - { label: "Icon (SVG Path)", name: "icon", widget: "string" }
+
+      - label: "Prozess"
+        name: "process"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Untertitel", name: "subtitle", widget: "text" }
+          - label: "Schritte"
+            name: "steps"
+            widget: "list"
+            collapsed: true
+            fields:
+              - { label: "Nummer", name: "number", widget: "string" }
+              - { label: "Titel", name: "title", widget: "string" }
+              - { label: "Beschreibung", name: "description", widget: "text" }
+              - { label: "Icon (SVG Path)", name: "icon", widget: "string" }
+
+      - label: "Leistungs-Teaser"
+        name: "services"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Untertitel", name: "subtitle", widget: "text" }
+          - { label: "CTA Text", name: "ctaText", widget: "string" }
+          - { label: "CTA URL", name: "ctaUrl", widget: "string" }
+          - { label: "CTA ARIA-Label", name: "ctaAriaLabel", widget: "string" }
+          - label: "Leistungen"
+            name: "items"
+            widget: "list"
+            collapsed: true
+            fields:
+              - { label: "ID", name: "id", widget: "string" }
+              - { label: "Titel", name: "title", widget: "string" }
+              - { label: "Beschreibung", name: "description", widget: "text" }
+              - { label: "Bild", name: "image", widget: "image" }
+              - { label: "Icon (SVG Path)", name: "icon", widget: "string" }
+
+      - label: "Warum METRA"
+        name: "whyMetra"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Untertitel", name: "subtitle", widget: "string" }
+          - label: "Punkte"
+            name: "items"
+            widget: "list"
+            collapsed: true
+            fields:
+              - { label: "Text", name: "text", widget: "string" }
+
+  # ═══════════════════════════════════════
+  # 3. LEISTUNGEN (Folder Collection)
+  # ═══════════════════════════════════════
+  - name: "leistungen"
+    label: "🛠️ Leistungen"
+    folder: "src/content/leistungen"
+    create: true
+    delete: true
+    slug: "{{id}}"
+    extension: "md"
+    fields:
+      - { label: "ID (für Anker-Link)", name: "id", widget: "string" }
+      - { label: "Titel", name: "title", widget: "string" }
+      - { label: "Beschreibung", name: "description", widget: "text" }
+      - { label: "Heading (Überschrift Feature-Liste)", name: "heading", widget: "string" }
+      - { label: "Bild", name: "image", widget: "image" }
+      - { label: "Icon (SVG Path)", name: "icon", widget: "string" }
+      - label: "Features"
+        name: "features"
+        widget: "list"
+        collapsed: true
+        fields:
+          - { label: "Feature", name: "feature", widget: "string" }
+
+  # ═══════════════════════════════════════
+  # 4. LEISTUNGEN-SEITE (Singleton)
+  # ═══════════════════════════════════════
+  - name: "leistungenPage"
+    label: "📄 Leistungen-Seite (Meta)"
+    folder: "src/content/leistungenPage"
+    create: false
+    delete: false
+    slug: "index"
+    extension: "md"
+    fields:
+      - { label: "Meta Titel", name: "title", widget: "string" }
+      - { label: "Meta Beschreibung", name: "description", widget: "text" }
+      - label: "Hero"
+        name: "hero"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Text", name: "text", widget: "text" }
+      - label: "Benefits"
+        name: "benefits"
+        widget: "list"
+        collapsed: true
+        fields:
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Beschreibung", name: "description", widget: "text" }
+          - { label: "Icon (SVG Path)", name: "icon", widget: "string" }
+      - label: "CTA"
+        name: "cta"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Text", name: "text", widget: "text" }
+          - { label: "Button Text", name: "buttonText", widget: "string" }
+          - { label: "Button URL", name: "buttonUrl", widget: "string" }
+
+  # ═══════════════════════════════════════
+  # 5. KONTAKT (Singleton)
+  # ═══════════════════════════════════════
+  - name: "kontakt"
+    label: "📞 Kontakt"
+    folder: "src/content/kontakt"
+    create: false
+    delete: false
+    slug: "index"
+    extension: "md"
+    fields:
+      - { label: "Meta Titel", name: "title", widget: "string" }
+      - { label: "Meta Beschreibung", name: "description", widget: "text" }
+      - label: "Hero"
+        name: "hero"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Label", name: "label", widget: "string" }
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Text", name: "text", widget: "text" }
+      - label: "Kontaktinfo Sidebar"
+        name: "sidebar"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Adresse Titel", name: "addressTitle", widget: "string" }
+          - { label: "Telefon Titel", name: "phoneTitle", widget: "string" }
+          - { label: "Telefon Hinweis", name: "phoneHint", widget: "string" }
+          - { label: "E-Mail Titel", name: "emailTitle", widget: "string" }
+          - { label: "WhatsApp Titel", name: "whatsappTitle", widget: "string" }
+          - { label: "WhatsApp Hinweis", name: "whatsappHint", widget: "string" }
+          - { label: "WhatsApp Button", name: "whatsappButton", widget: "string" }
+          - { label: "Schnelle Antwort Titel", name: "quickResponseTitle", widget: "string" }
+          - { label: "Schnelle Antwort Text", name: "quickResponseText", widget: "text" }
+      - label: "Formular"
+        name: "form"
+        widget: "object"
+        collapsed: true
+        fields:
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Untertitel", name: "subtitle", widget: "text" }
+          - { label: "Name Label", name: "nameLabel", widget: "string" }
+          - { label: "Name Placeholder", name: "namePlaceholder", widget: "string" }
+          - { label: "E-Mail Label", name: "emailLabel", widget: "string" }
+          - { label: "E-Mail Placeholder", name: "emailPlaceholder", widget: "string" }
+          - { label: "Telefon Label", name: "phoneLabel", widget: "string" }
+          - { label: "Telefon Placeholder", name: "phonePlaceholder", widget: "string" }
+          - { label: "Nachricht Label", name: "messageLabel", widget: "string" }
+          - { label: "Nachricht Placeholder", name: "messagePlaceholder", widget: "string" }
+          - { label: "Privacy Text", name: "privacyText", widget: "text" }
+          - { label: "Submit Button", name: "submitButton", widget: "string" }
+          - { label: "Submit Loading", name: "submitLoading", widget: "string" }
+          - { label: "Success Titel", name: "successTitle", widget: "string" }
+          - { label: "Success Text", name: "successText", widget: "text" }
+          - { label: "Error Titel", name: "errorTitle", widget: "string" }
+          - { label: "Error Text", name: "errorText", widget: "text" }
+          - { label: "Error Timeout Text", name: "errorTimeoutText", widget: "text" }
+
+  # ═══════════════════════════════════════
+  # 6. IMPRESSUM (Singleton)
+  # ═══════════════════════════════════════
+  - name: "impressum"
+    label: "⚖️ Impressum"
+    folder: "src/content/impressum"
+    create: false
+    delete: false
+    slug: "index"
+    extension: "md"
+    fields:
+      - { label: "Meta Titel", name: "title", widget: "string" }
+      - { label: "Meta Beschreibung", name: "description", widget: "text" }
+      - { label: "Hero Label", name: "heroLabel", widget: "string" }
+      - { label: "Hero Titel", name: "heroTitle", widget: "string" }
+      - label: "Abschnitte"
+        name: "sections"
+        widget: "list"
+        collapsed: false
+        fields:
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Inhalt (Markdown)", name: "content", widget: "markdown" }
+
+  # ═══════════════════════════════════════
+  # 7. DATENSCHUTZ (Singleton)
+  # ═══════════════════════════════════════
+  - name: "datenschutz"
+    label: "🔒 Datenschutz"
+    folder: "src/content/datenschutz"
+    create: false
+    delete: false
+    slug: "index"
+    extension: "md"
+    fields:
+      - { label: "Meta Titel", name: "title", widget: "string" }
+      - { label: "Meta Beschreibung", name: "description", widget: "text" }
+      - { label: "Hero Label", name: "heroLabel", widget: "string" }
+      - { label: "Hero Titel", name: "heroTitle", widget: "string" }
+      - label: "Abschnitte"
+        name: "sections"
+        widget: "list"
+        collapsed: false
+        fields:
+          - { label: "Titel", name: "title", widget: "string" }
+          - { label: "Inhalt (Markdown)", name: "content", widget: "markdown" }
+
+  # ═══════════════════════════════════════
+  # 8. WEITERE SEITEN (404 etc.)
+  # ═══════════════════════════════════════
+  - name: "seiten"
+    label: "📑 Weitere Seiten"
+    folder: "src/content/seiten"
+    create: false
+    delete: false
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Slug", name: "slug", widget: "string" }
+      - { label: "Meta Titel", name: "title", widget: "string" }
+      - { label: "Meta Beschreibung", name: "description", widget: "text" }
+      - { label: "H1 Überschrift", name: "heading", widget: "string" }
+      - { label: "Text", name: "text", widget: "text" }

@@ -1,135 +1,136 @@
-# METRA Baulogistik Website - Agent Documentation
+# METRA Baulogistik Website – Agent-Dokumentation
 
-> **Language**: German (website content), mixed German/English in code comments and agent docs  
-> **Framework**: Astro 5.x with Static Site Generation  
-> **Styling**: Tailwind CSS 3.x  
+> **Sprache**: Deutsch (Website-Inhalt), Gemischt Deutsch/Englisch in Code-Kommentaren und Agent-Docs
+> **Framework**: Astro 5.x mit Static Site Generation
+> **Styling**: Tailwind CSS 3.x
 > **Deployment**: Netlify
 
-## Project Overview
+## Projektübersicht
 
-This is the corporate website for **METRA Baulogistik & Projektsteuerung GmbH**, a construction logistics and project management company based in Cologne, Germany. It is a static, SEO-optimized, accessible multi-page site deployed on Netlify.
+Dies ist die Unternehmenswebsite der **METRA Baulogistik & Projektsteuerung GmbH**, ein Bau-logistik- und Projektsteuerungsunternehmen mit Sitz in Köln. Es handelt sich um eine statische, SEO-optimierte, barrierefreie Multi-Page-Website, die auf Netlify gehostet wird.
 
-### Key Characteristics
+### Kernmerkmale
 
-- **German-language** business website for the construction/logistics industry
-- **Dark theme** design with gold accent color (`#dab252`)
-- **Mobile-first responsive** design
-- **WCAG accessibility** compliant (ARIA labels, semantic HTML, keyboard navigation, reduced motion support)
-- **SEO-optimized** with Schema.org structured data, meta tags, Open Graph, Twitter Cards, sitemap.xml, robots.txt
-- **Cookie consent** banner implemented (localStorage-based, GDPR-compliant)
-- **Contact form** via Web3Forms (requires access key configuration before deployment)
-- **WhatsApp integration** for direct messaging
-- **No automated test suite** — testing is performed manually
+- **Deutschsprachige** Business-Website für die Baubranche/Logistik
+- **Dark-Theme** Design mit Gold-Akzentfarbe (`#dab252`)
+- **Mobile-first** responsives Design
+- **Barrierefreiheit** (WCAG): ARIA-Labels, semantisches HTML, Tastaturnavigation, Reduced-Motion-Support, Skip-Links, Fokus-Fallen
+- **SEO-optimiert**: Schema.org Structured Data, Meta-Tags, Open Graph, Twitter Cards, Sitemap, Robots.txt, Canonical URLs
+- **Cookie-Consent-Banner** (localStorage-basiert, DSGVO-konform)
+- **Kontaktformular** via Web3Forms
+- **WhatsApp-Integration** für Direktnachrichten
+- **Kein automatisierter Test-Suite** – Testing erfolgt manuell
+- **ESM-only** Projekt (`"type": "module"` in package.json)
 
 ---
 
-## Technology Stack
+## Technologie-Stack
 
-| Category | Technology | Version |
-|----------|------------|---------|
+| Kategorie | Technologie | Version |
+|-----------|------------|---------|
 | Framework | Astro | ^5.17.1 |
 | Styling | Tailwind CSS | ^3.4.19 |
 | PostCSS | autoprefixer | ^10.4.27 |
-| Type System | TypeScript (via Astro) | strict config |
-| Deployment | Netlify | static hosting |
-| Form Handling | Web3Forms | external API |
-| Font | Inter | self-hosted woff2 (regular, 600, 700) |
-| Image Optimization | Sharp | ^0.34.5 |
+| TypeScript | Astro strict config | – |
+| Deployment | Netlify | Static Hosting |
+| Formular-Handling | Web3Forms | Externe API |
+| Schriftart | Inter | Self-hosted woff2 (Regular, 600, 700) |
+| Bildoptimierung | Sharp | ^0.34.5 |
 
 ---
 
-## Project Structure
+## Projektstruktur
 
 ```
 /
 ├── src/
-│   ├── components/          # Reusable Astro components
-│   │   ├── CookieBanner.astro    # GDPR cookie consent banner
-│   │   ├── Footer.astro          # Site footer with links & contact info
-│   │   ├── Header.astro          # Navigation header with mobile menu
-│   │   └── WhatsAppButton.astro  # Floating WhatsApp CTA button
+│   ├── components/              # Wiederverwendbare Astro-Komponenten
+│   │   ├── CookieBanner.astro   # DSGVO-konformes Cookie-Consent-Banner
+│   │   ├── Footer.astro         # Footer mit Links & Kontaktinfo
+│   │   ├── Header.astro         # Navigation mit Mobile-Menü
+│   │   └── WhatsAppButton.astro # Floatender WhatsApp-CTA-Button
 │   ├── layouts/
-│   │   └── Layout.astro          # Base HTML layout with SEO, Schema.org
-│   ├── pages/               # File-based routing
-│   │   ├── index.astro           # Homepage (Hero, Services teaser, Process, CTA)
-│   │   ├── leistungen.astro      # Services page (8 detailed service sections)
-│   │   ├── kontakt.astro         # Contact page with Web3Forms form
-│   │   ├── datenschutz.astro     # Privacy policy (DSGVO compliant)
-│   │   ├── impressum.astro       # Legal imprint (§ 5 TMG)
-│   │   └── 404.astro             # Custom 404 error page
+│   │   └── Layout.astro         # Basis-HTML-Layout mit SEO, Schema.org
+│   ├── pages/                   # File-based Routing
+│   │   ├── index.astro          # Startseite (Hero, Leistungs-Teaser, 4-Schritte-Prozess, CTA)
+│   │   ├── leistungen.astro     # Leistungsseite (8 detaillierte Service-Sektionen)
+│   │   ├── kontakt.astro        # Kontaktseite mit Web3Forms-Formular
+│   │   ├── datenschutz.astro    # Datenschutzerklärung (DSGVO-konform)
+│   │   ├── impressum.astro      # Impressum (§ 5 TMG)
+│   │   └── 404.astro            # Benutzerdefinierte 404-Fehlerseite
 │   └── styles/
-│       └── global.css            # Tailwind imports + custom styles + fonts
-├── public/                  # Static assets
-│   ├── fonts/               # Self-hosted Inter font (regular, 600, 700 woff2)
-│   ├── images/              # WebP images (logo, hero, 8 service images)
+│       └── global.css           # Tailwind-Imports + Custom Styles + Fonts
+├── public/                      # Statische Assets
+│   ├── fonts/                   # Self-hosted Inter (Regular, 600, 700 woff2)
+│   ├── images/                  # WebP-Bilder (Logo, Hero, 8 Leistungsbilder)
 │   ├── favicon.svg
 │   ├── robots.txt
 │   ├── sitemap.xml
 │   └── site.webmanifest
-├── .vscode/                 # VS Code settings
-│   ├── extensions.json      # Recommended: astro-build.astro-vscode
-│   └── launch.json          # Debug config for dev server
-├── astro.config.mjs         # Astro configuration
-├── tailwind.config.js       # Tailwind customization (colors, fonts, animations)
-├── postcss.config.js        # PostCSS plugins (tailwindcss, autoprefixer)
-├── tsconfig.json            # TypeScript strict config
-├── netlify.toml             # Netlify deployment & security headers
+├── .vscode/                     # VS Code Einstellungen
+│   ├── extensions.json
+│   └── launch.json
+├── astro.config.mjs             # Astro-Konfiguration
+├── tailwind.config.js           # Tailwind-Anpassungen (Farben, Fonts, Animationen)
+├── postcss.config.js            # PostCSS-Plugins (tailwindcss, autoprefixer)
+├── tsconfig.json                # TypeScript strict config
+├── netlify.toml                 # Netlify Deployment & Security Headers
 └── package.json
 ```
 
 ---
 
-## Build Commands
+## Build-Befehle
 
 ```bash
-# Install dependencies
+# Abhängigkeiten installieren
 npm install
 
-# Development server (localhost:4321)
+# Entwicklungsserver (localhost:4321)
 npm run dev
 
-# Production build (outputs to ./dist/)
+# Produktions-Build (Output in ./dist/)
 npm run build
 
-# Preview production build locally
+# Produktions-Build lokal previewen
 npm run preview
 
-# Astro CLI commands
+# Astro CLI
 npm run astro -- --help
 ```
 
 ---
 
-## Configuration Details
+## Konfigurationsdetails
 
 ### Astro Config (`astro.config.mjs`)
 
-- **Dev Toolbar**: disabled
+- **Dev Toolbar**: deaktiviert
 - **Output**: `static` (Static Site Generation)
-- **Image optimization**: Sharp via `astro/assets/services/sharp`
-- **HTML compression**: enabled (`compressHTML: true`)
-- **Build format**: directory
+- **Bildoptimierung**: Sharp via `astro/assets/services/sharp`
+- **HTML-Komprimierung**: aktiviert (`compressHTML: true`)
+- **Build-Format**: `directory`
 
 ### Tailwind Config (`tailwind.config.js`)
 
-Custom theme extensions:
+Custom Theme Extensions:
 
 ```javascript
-// Colors
-background: '#00002e',     // Dark background
-accent: '#dab252',         // Gold accent (brand color)
-secondary: '#c8c7cf',      // Light gray text
-'accent-hover': '#c9a14a', // Darker gold
+// Farben
+background: '#00002e',     // Dunkler Hintergrund
+accent: '#dab252',         // Gold-Akzent (Markenfarbe)
+secondary: '#c8c7cf',      // Helles Grau für Text
+'accent-hover': '#c9a14a', // Dunkleres Gold
 
-// Font Family
+// Schriftart
 sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
 
-// Animations
+// Animationen
 'fade-in': 'fadeIn 0.6s ease-out'
 'fade-in-up': 'fadeInUp 0.6s ease-out'
 ```
 
-Content paths: `./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}`
+Content-Pfade: `./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}`
 
 ### PostCSS Config (`postcss.config.js`)
 
@@ -138,270 +139,274 @@ Content paths: `./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}`
 
 ### TypeScript Config (`tsconfig.json`)
 
-- Extends `astro/tsconfigs/strict`
-- Includes `.astro/types.d.ts`
-- Excludes `dist`
+- Erweitert `astro/tsconfigs/strict`
+- Include: `.astro/types.d.ts`, `**/*`
+- Exclude: `dist`
 
 ### Netlify Config (`netlify.toml`)
 
-- **Build command**: `npm run build`
-- **Publish directory**: `dist`
-- **Security headers**:
-  - Cache-Control (1 year for static assets: images, fonts, JS, CSS)
+- **Build-Befehl**: `npm run build`
+- **Publish-Verzeichnis**: `dist`
+- **Security Headers**:
+  - Cache-Control (1 Jahr für statische Assets: Bilder, Fonts, JS, CSS)
   - X-Frame-Options: DENY
   - X-Content-Type-Options: nosniff
   - X-XSS-Protection: 1; mode=block
   - Referrer-Policy: strict-origin-when-cross-origin
   - Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   - Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
-  - Content-Security-Policy (CSP) with Web3Forms API allowance
+  - Content-Security-Policy (CSP) mit Web3Forms-API-Erlaubnis
 
 ---
 
-## Code Style Guidelines
+## Code-Style-Richtlinien
 
-### Astro Components
+### Astro-Komponenten
 
-1. **Frontmatter first**: Use TypeScript in frontmatter for data definitions
-2. **Props interfaces**: Define explicit interfaces for component props (e.g., `interface Props { title?: string; description?: string; }`)
-3. **Semantic HTML**: Use proper heading hierarchy, landmarks, ARIA labels
-4. **Accessibility**:
-   - All interactive elements must have `aria-label` or visible text
-   - Use `focus-visible` classes for keyboard navigation
-   - Skip links for main content (`#main-content`)
-   - Reduced motion media query support in global.css
+1. **Frontmatter zuerst**: TypeScript im Frontmatter für Daten-Definitionen
+2. **Props-Interfaces**: Explizite Interfaces für Komponenten-Props (z.B. `interface Props { title?: string; description?: string; }`)
+3. **Semantisches HTML**: Korrekte Heading-Hierarchie, Landmarks, ARIA-Labels
+4. **Barrierefreiheit**:
+   - Alle interaktiven Elemente müssen `aria-label` oder sichtbaren Text haben
+   - `focus-visible` Klassen für Tastaturnavigation
+   - Skip-Links für Hauptinhalt (`#main-content`)
+   - Reduced-Motion Media-Query-Support in global.css
 
 ### CSS/Styling
 
-1. **Tailwind-first**: Use utility classes; custom CSS only in `global.css`
-2. **Custom properties**: Use Tailwind theme values, not hardcoded colors
-3. **Responsive prefix**: Mobile-first (`sm:`, `md:`, `lg:`, `xl:`)
-4. **Dark theme**: Site is permanently dark; no light mode toggle
-5. **Custom scrollbar**: Styled with gold accent on hover
+1. **Tailwind-first**: Utility-Klassen verwenden; Custom-CSS nur in `global.css`
+2. **Custom Properties**: Tailwind-Theme-Werte verwenden, keine hartkodierten Farben
+3. **Responsive Prefix**: Mobile-first (`sm:`, `md:`, `lg:`, `xl:`)
+4. **Dark Theme**: Permanently Dark; kein Light-Mode-Toggle
+5. **Custom Scrollbar**: Mit Gold-Akzent im Hover-Zustand gestylt
 
 ### JavaScript/TypeScript
 
-1. **TypeScript**: Use type annotations in scripts (strict config)
-2. **IIFE pattern**: Wrap client scripts in IIFEs to avoid global scope
-3. **Null checks**: Use optional chaining (`?.`) for DOM elements
-4. **Event listeners**: Clean up when appropriate (rare in Astro static sites)
+1. **TypeScript**: Typ-Annotationen in Scripts verwenden (strict config)
+2. **IIFE-Pattern**: Client-Scripts in IIFEs wrappen, um globalen Scope zu vermeiden
+3. **Null-Checks**: Optional Chaining (`?.`) für DOM-Elemente verwenden
+4. **Event Listener**: Bei Bedarf aufräumen (selten in Astro-Static-Sites)
+5. **ESM-only**: Alle Scripts verwenden ES-Module-Syntax (kein `require()`)
 
 ### Naming Conventions
 
-- **Components**: PascalCase (e.g., `CookieBanner.astro`)
-- **Variables**: camelCase (e.g., `contactInfo`)
-- **Constants**: UPPER_SNAKE_CASE for true constants (e.g., `WEB3FORMS_ENDPOINT`)
-- **Files**: kebab-case for pages, PascalCase for components
-- **German content**: All user-facing text is in German
+- **Komponenten**: PascalCase (z.B. `CookieBanner.astro`)
+- **Variablen**: camelCase (z.B. `contactInfo`)
+- **Konstanten**: UPPER_SNAKE_CASE für echte Konstanten (z.B. `WEB3FORMS_ENDPOINT`)
+- **Dateien**: kebab-case für Pages, PascalCase für Komponenten
+- **Deutsche Inhalte**: Alle nutzerseitigen Texte sind auf Deutsch
 
 ---
 
-## Key Components
+## Wichtige Komponenten
 
 ### Layout.astro
 
-Base layout providing:
-- HTML5 boilerplate with German lang attribute (`lang="de-DE"`)
-- Meta tags (SEO, Open Graph, Twitter Cards)
-- Schema.org JSON-LD (Organization + LocalBusiness structured data)
-- Self-hosted Inter font preloading
-- Critical CSS inline for above-the-fold content
-- Cookie banner inclusion
-- Skip-to-content accessibility link
+Basis-Layout mit:
+- HTML5-Boilerplate mit deutscher Sprache (`lang="de-DE"`)
+- Meta-Tags (SEO, Open Graph, Twitter Cards)
+- Schema.org JSON-LD (Organization + LocalBusiness Structured Data)
+- Self-hosted Inter-Font Preloading
+- Critical CSS Inline für Above-the-fold
+- Cookie-Banner-Einbindung
+- Skip-to-content Accessibility-Link
+- Preconnect zu Web3Forms API
 
 ### Header.astro
 
-- Fixed position navigation with backdrop blur
-- Company logo with tagline claim
-- Desktop navigation with active link highlighting
-- Mobile hamburger menu with slide-out drawer
-- CTA button "Angebot anfordern"
-- ARIA attributes for accessibility
-- Client-side JavaScript for mobile menu toggle (IIFE pattern)
-- Focus trap for mobile menu
-- Noscript fallback for mobile menu
+- Fixed-Position Navigation mit Backdrop-Blur
+- Firmenlogo mit Claim-Tagline
+- Desktop-Navigation mit Active-Link-Highlighting
+- Mobiles Hamburger-Menü mit Slide-out-Drawer
+- CTA-Button "Angebot anfordern"
+- ARIA-Attribute für Barrierefreiheit
+- Client-seitiges JavaScript für Mobile-Menü-Toggle (IIFE-Pattern)
+- Focus-Trap für mobiles Menü
+- Noscript-Fallback für mobiles Menü
+- Active-Link-Detection via `Astro.url.pathname`
 
 ### Footer.astro
 
-- 4-column layout (Company info, Services, Company links, Contact)
-- Contact information with phone/email/WhatsApp
-- Legal links (Impressum, Datenschutz)
-- Disclaimer notice about security services
+- 4-Spalten-Layout (Firmeninfo, Leistungen, Unternehmenslinks, Kontakt)
+- Kontaktinformationen mit Telefon/E-Mail/WhatsApp
+- Rechtliche Links (Impressum, Datenschutz)
+- Disclaimer-Hinweis zu Sicherheitsleistungen
+- Dynamisches Copyright-Jahr
 
 ### CookieBanner.astro
 
-- Fixed bottom banner with GDPR-compliant cookie consent
-- Three options: Accept All, Decline, Essential Only
-- Stores preference in localStorage (`metra_cookie_consent`)
-- Dispatches custom event on acceptance for potential analytics
-- Hidden by default, slides up after 1s delay if no consent found
+- Fixed-Bottom-Banner mit DSGVO-konformem Cookie-Consent
+- Drei Optionen: Alle Akzeptieren, Ablehnen, Nur Essenzielle
+- Speichert Präferenz in localStorage (`metra_cookie_consent`)
+- Sendet Custom Event bei Annahme für potenzielles Tracking
+- Standardmäßig versteckt, gleitet nach 1s hoch, wenn keine Einwilligung vorliegt
 
 ### WhatsAppButton.astro
 
-- Fixed floating button (bottom-right)
-- Pulse animation on hover
-- Links to WhatsApp with dedicated WhatsApp number
+- Fixed-Floating-Button (unten rechts)
+- Pulse-Animation beim Hover
+- Link zu WhatsApp mit dedizierter WhatsApp-Nummer
 
 ---
 
-## Pages
+## Seiten
 
-| Route | File | Purpose |
-|-------|------|---------|
-| `/` | `index.astro` | Homepage with hero, services teaser, 4-step process, CTA sections |
-| `/leistungen` | `leistungen.astro` | Detailed services page with 8 service descriptions |
-| `/kontakt` | `kontakt.astro` | Contact form (Web3Forms), contact info, WhatsApp link |
-| `/impressum` | `impressum.astro` | Legal imprint (§ 5 TMG) with company details |
-| `/datenschutz` | `datenschutz.astro` | Privacy policy (DSGVO compliant) |
-| `/404` | `404.astro` | Custom 404 error page |
+| Route | Datei | Zweck |
+|-------|------|-------|
+| `/` | `index.astro` | Startseite mit Hero, Leistungs-Teaser, 4-Schritte-Prozess, CTA-Sektionen |
+| `/leistungen` | `leistungen.astro` | Detaillierte Leistungsseite mit 8 Service-Beschreibungen |
+| `/kontakt` | `kontakt.astro` | Kontaktformular (Web3Forms), Kontaktinfo, WhatsApp-Link |
+| `/impressum` | `impressum.astro` | Rechtliches Impressum (§ 5 TMG) mit Firmendetails |
+| `/datenschutz` | `datenschutz.astro` | Datenschutzerklärung (DSGVO-konform) |
+| `/404` | `404.astro` | Benutzerdefinierte 404-Fehlerseite |
 
-Each page includes:
-- Individual `<Layout>` with page-specific title, description, canonical
+Jede Seite enthält:
+- Individuelles `<Layout>` mit seiten-spezifischem Title, Description, Canonical
 - Schema.org BreadcrumbList JSON-LD
-- Page-specific Schema.org structured data where applicable
-- `<Header />`, `<Footer />`, `<WhatsAppButton />` imports (not included in Layout)
+- Seiten-spezifische Schema.org Structured Data wo anwendbar (z.B. Service-Schema auf `/leistungen`, ContactPage-Schema auf `/kontakt`)
+- `<Header />`, `<Footer />`, `<WhatsAppButton />` Imports (nicht im Layout enthalten)
 
 ---
 
-## Contact Form Setup
+## Kontaktformular-Setup
 
-The contact form uses **Web3Forms** (configured in `kontakt.astro`):
+Das Kontaktformular verwendet **Web3Forms** (konfiguriert in `kontakt.astro`):
 
 ```typescript
-// ⚠️ DEPLOYMENT BLOCKER: Replace with your actual Web3Forms access key before going live.
-const WEB3FORMS_ACCESS_KEY = 'YOUR_ACCESS_KEY';
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+const WEB3FORMS_ACCESS_KEY = '17e31a52-3b0a-42ac-9244-8400b05477ee';
 ```
 
-**To configure:**
-1. Sign up at https://web3forms.com/
-2. Get your access key
-3. Replace `YOUR_ACCESS_KEY` in `src/pages/kontakt.astro`
-
 **Features:**
-- Honeypot field (`botcheck`) for bot protection
-- Client-side validation (required fields)
-- Loading states during submission
-- Success/error message display
-- Privacy checkbox (required)
-- Reply-to email auto-population
-- Form submission via fetch API with async handling
-- 10-second timeout with abort controller
+- Honeypot-Feld (`botcheck`) für Bot-Schutz
+- Client-seitige Validierung (Pflichtfelder)
+- Loading-Zustände während der Übermittlung
+- Success/Error-Meldungsanzeige
+- Privacy-Checkbox (Pflichtfeld)
+- Reply-to E-Mail automatisch befüllt
+- Formular-Übermittlung via fetch API mit async Handling
+- 10-Sekunden-Timeout mit Abort-Controller
 
 ---
 
 ## Testing
 
-This project does **not** include an automated test suite. Testing is performed manually.
+Dieses Projekt enthält **keine** automatisierte Test-Suite. Testing erfolgt manuell.
 
-**Manual testing checklist before deploying:**
+**Manuelle Testing-Checkliste vor Deployment:**
 
-- [ ] All pages render without errors (`npm run build`)
-- [ ] Responsive design works on mobile, tablet, desktop
-- [ ] Navigation works (including mobile menu toggle)
-- [ ] Contact form submits correctly (test with Web3Forms)
-- [ ] Cookie banner appears for new users
-- [ ] WhatsApp button opens correct chat
-- [ ] No console errors
-- [ ] Accessibility: keyboard navigation works
-- [ ] Accessibility: skip link works
-- [ ] Accessibility: focus indicators visible
-- [ ] SEO: meta tags present on all pages
-- [ ] SEO: Schema.org data validates
+- [ ] Alle Seiten rendern fehlerfrei (`npm run build`)
+- [ ] Responsives Design funktioniert auf Mobile, Tablet, Desktop
+- [ ] Navigation funktioniert (inkl. Mobile-Menü-Toggle)
+- [ ] Kontaktformular übermittelt korrekt (mit Web3Forms testen)
+- [ ] Cookie-Banner erscheint für neue Nutzer
+- [ ] WhatsApp-Button öffnet korrekten Chat
+- [ ] Keine Console-Fehler
+- [ ] Barrierefreiheit: Tastaturnavigation funktioniert
+- [ ] Barrierefreiheit: Skip-Link funktioniert
+- [ ] Barrierefreiheit: Focus-Indikatoren sichtbar
+- [ ] SEO: Meta-Tags auf allen Seiten vorhanden
+- [ ] SEO: Schema.org-Daten validieren
 
 ---
 
 ## Deployment
 
-**Platform**: Netlify
+**Plattform**: Netlify
 
-**Automatic deployment triggers:**
-- Push to `master` branch deploys to production
-- Build command: `npm run build`
-- Output directory: `dist`
+**Automatische Deployment-Trigger:**
+- Push auf `master`-Branch deployt in Production
+- Build-Befehl: `npm run build`
+- Output-Verzeichnis: `dist`
 
-**Environment variables:** None currently required (Web3Forms key is hardcoded as a placeholder)
+**Umgebungsvariablen**: Derzeit keine erforderlich (Web3Forms-Key ist hartkodiert)
 
-**Pre-deployment checklist:**
-- [ ] Replace `YOUR_ACCESS_KEY` with real Web3Forms key in `kontakt.astro`
-- [ ] Replace placeholder USt-IdNr. in `impressum.astro`
-- [ ] Replace placeholder Handelsregisternummer in `impressum.astro`
-- [ ] Update `sitemap.xml` dates if content changed significantly
+**Pre-Deployment-Checkliste:**
+- [ ] USt-IdNr. in `impressum.astro` ersetzen (aktuell: `DE [USt-IdNr. wird ergänzt]`)
+- [ ] Handelsregisternummer in `impressum.astro` ersetzen (aktuell: `[Handelsregisternummer wird ergänzt]`)
+- [ ] `sitemap.xml` Daten aktualisieren, falls sich Inhalte signifikant geändert haben
 
 ---
 
-## Security Considerations
+## Sicherheitsaspekte
 
-1. **CSP Headers**: Configured in `netlify.toml`
+1. **CSP-Headers**: Konfiguriert in `netlify.toml`
    - Default src: 'self'
-   - Scripts: 'self' + 'unsafe-inline' (required for Astro islands)
-   - Connect: allows Web3Forms API (`https://api.web3forms.com`)
+   - Scripts: 'self' + 'unsafe-inline' (erforderlich für Astro-Inseln)
+   - Style src: 'self' + 'unsafe-inline'
+   - Img src: 'self' + data:
+   - Font src: 'self'
+   - Connect: erlaubt Web3Forms API (`https://api.web3forms.com`)
+   - Frame ancestors: 'none'
+   - Base URI: 'self'
    - Form action: 'self' + `https://api.web3forms.com`
 
-2. **Form Security**:
-   - Honeypot field (`botcheck`) must remain empty for submission
-   - Client-side validation only; server validates at Web3Forms
+2. **Formular-Sicherheit**:
+   - Honeypot-Feld (`botcheck`) muss leer bleiben für Übermittlung
+   - Client-seitige Validierung nur; Server validiert bei Web3Forms
 
-3. **No sensitive data** in repository (no API keys, credentials except placeholder)
-
----
-
-## Performance Optimizations
-
-- Static site generation (no server runtime needed)
-- Self-hosted fonts with `font-display: swap`
-- Image optimization via Sharp
-- HTML compression enabled
-- Preconnect to Web3Forms API
-- Long-term caching headers for static assets (1 year)
-- Lazy loading for below-the-fold images
-- Critical CSS inline for above-the-fold content
-- `fetchpriority="high"` on hero image
+3. **Keine sensiblen Daten** im Repository (keine API-Keys, Credentials)
 
 ---
 
-## Common Issues
+## Performance-Optimierungen
 
-### Web3Forms not working
-- Verify access key is set correctly (not 'YOUR_ACCESS_KEY')
-- Check browser console for network errors
-- Ensure `api.web3forms.com` is reachable from user's location
-
-### Cookie banner not showing
-- Clear localStorage key `metra_cookie_consent`
-- Check for JavaScript errors in console
-
-### Styles not updating
-- Restart dev server (Tailwind JIT mode cache)
-- Check `tailwind.config.js` content paths include your files
+- Static Site Generation (kein Server-Runtime nötig)
+- Self-hosted Fonts mit `font-display: swap`
+- Bildoptimierung via Sharp
+- HTML-Komprimierung aktiviert
+- Preconnect zu Web3Forms API
+- Long-term Caching-Headers für statische Assets (1 Jahr)
+- Lazy Loading für Below-the-fold Bilder (`loading="lazy"`)
+- Critical CSS Inline für Above-the-fold Content
+- `fetchpriority="high"` auf Hero-Bild
+- `loading="eager"` auf Hero-Bild
 
 ---
 
-## External Dependencies
+## Häufige Probleme
 
-| Service | Purpose | URL |
-|---------|---------|-----|
-| Web3Forms | Contact form handling | https://api.web3forms.com |
-| WhatsApp | Direct messaging | https://wa.me/491738888378 |
+### Web3Forms funktioniert nicht
+- Access-Key korrekt prüfen
+- Browser-Console auf Netzwerkfehler prüfen
+- Sicherstellen, dass `api.web3forms.com` vom Nutzerstandort erreichbar ist
+
+### Cookie-Banner wird nicht angezeigt
+- localStorage-Key `metra_cookie_consent` löschen
+- JavaScript-Fehler in der Console prüfen
+
+### Styles werden nicht aktualisiert
+- Dev-Server neustarten (Tailwind JIT-Mode-Cache)
+- Prüfen, ob `tailwind.config.js` Content-Pfade die Dateien enthalten
+
+---
+
+## Externe Abhängigkeiten
+
+| Service | Zweck | URL |
+|---------|-------|-----|
+| Web3Forms | Kontaktformular-Handling | https://api.web3forms.com |
+| WhatsApp | Direktnachrichten | https://wa.me/491738888378 |
 | Netlify | Hosting & CDN | https://www.netlify.com |
 
 ---
 
-## Company Information
+## Firmeninformationen
 
 - **Name**: METRA Baulogistik & Projektsteuerung GmbH
-- **Owner**: Sascha Trajkovic
-- **Address**: Im Mediapark 5, 50670 Köln, Germany
-- **Phone**: 0800 8888369
-- **Email**: info@metra-baulogistik.de
+- **Inhaber/Geschäftsführer**: Sascha Trajkovic
+- **Adresse**: Im Mediapark 5, 50670 Köln, Deutschland
+- **Telefon**: 0800 8888369
+- **E-Mail**: info@metra-baulogistik.de
 - **Website**: https://www.metra-baulogistik.de
 
 ---
 
-## License & Legal
+## Lizenz & Rechtliches
 
-- Website content: © METRA Baulogistik & Projektsteuerung GmbH
-- This is proprietary code for the company's website
+- Website-Inhalt: © METRA Baulogistik & Projektsteuerung GmbH
+- Dies ist proprietärer Code für die Unternehmenswebsite
 
 ---
 
-Last updated: April 2026
+Letzte Aktualisierung: Juni 2026

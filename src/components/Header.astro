@@ -1,5 +1,8 @@
 ---
-const navLinks = [
+import { getEntry } from 'astro:content';
+
+const settings = await getEntry('settings', 'global');
+const navLinks = settings?.data?.navigation || [
   { href: '/', label: 'Startseite', ariaLabel: 'Zur Startseite' },
   { href: '/leistungen', label: 'Leistungen', ariaLabel: 'Unsere Leistungen ansehen' },
   { href: '/kontakt', label: 'Kontakt', ariaLabel: 'Kontakt aufnehmen' },

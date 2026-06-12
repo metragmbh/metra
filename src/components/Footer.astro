@@ -1,8 +1,15 @@
 ---
+import { getEntry } from 'astro:content';
+
 const currentYear = new Date().getFullYear();
 
+const settings = await getEntry('settings', 'global');
+const s = settings?.data;
+const company = s?.company;
+const footer = s?.footer;
+
 const footerLinks = {
-  services: [
+  services: footer?.serviceLinks || [
     { label: 'Zufahrtssteuerung', href: '/leistungen' },
     { label: 'Materialfluss', href: '/leistungen' },
     { label: 'Baustellenorganisation', href: '/leistungen' },
@@ -10,7 +17,7 @@ const footerLinks = {
     { label: 'Bauleitungsunterstützung', href: '/leistungen' },
     { label: 'Dokumentation', href: '/leistungen' },
   ],
-  company: [
+  company: footer?.companyLinks || [
     { label: 'Über uns', href: '/' },
     { label: 'Leistungen', href: '/leistungen' },
     { label: 'Kontakt', href: '/kontakt' },
@@ -22,14 +29,14 @@ const footerLinks = {
 };
 
 const contactInfo = {
-  company: 'METRA Baulogistik & Projektsteuerung GmbH',
-  owner: 'Sascha Trajkovic',
-  address: 'Im Mediapark 5',
-  city: '50670 Köln',
-  phone: '08008888369',
-  phoneDisplay: '0800 8888369',
-  whatsapp: '491738888378',
-  email: 'info@metra-baulogistik.de',
+  company: company?.name || 'METRA Baulogistik & Projektsteuerung GmbH',
+  owner: company?.owner || 'Sascha Trajkovic',
+  address: company?.street || 'Im Mediapark 5',
+  city: `${company?.zip || '50670'} ${company?.city || 'Köln'}`,
+  phone: company?.phoneRaw || '08008888369',
+  phoneDisplay: company?.phoneDisplay || '0800 8888369',
+  whatsapp: company?.whatsapp || '491738888378',
+  email: company?.email || 'info@metra-baulogistik.de',
 };
 ---
 

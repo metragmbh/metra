@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import CookieBanner from '../components/CookieBanner.astro';
+import { getEntry } from 'astro:content';
 
 interface Props {
   title?: string;
@@ -9,35 +10,39 @@ interface Props {
   canonical?: string;
 }
 
+const settings = await getEntry('settings', 'global');
+const s = settings?.data;
+
 const { 
-  title = 'METRA Baulogistik & Projektsteuerung GmbH | Organisation · Effizienz · Kontrolle',
-  description = 'Als verlängerter Arm der Bauleitung koordinieren wir sämtliche logistischen Abläufe – für reibungslose Prozesse und lückenlose Dokumentation. 24/7 Verfügbarkeit.',
-  ogImage = '/images/hero.webp',
+  title = s?.seo?.defaultTitle || 'METRA Baulogistik & Projektsteuerung GmbH',
+  description = s?.seo?.defaultDescription || '',
+  ogImage = s?.seo?.ogImage || '/images/hero.webp',
   canonical = Astro.url.pathname
 } = Astro.props;
 
-const siteUrl = 'https://www.metra-baulogistik.de';
+const siteUrl = s?.seo?.siteUrl || 'https://www.metra-baulogistik.de';
 const fullCanonical = `${siteUrl}${canonical}`;
+const company = s?.company;
 
 // Schema.org JSON-LD
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'METRA Baulogistik & Projektsteuerung GmbH',
+  name: company?.name || 'METRA Baulogistik & Projektsteuerung GmbH',
   url: siteUrl,
   logo: `${siteUrl}/images/logoneu.png`,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Im Mediapark 5',
-    addressLocality: 'Köln',
-    postalCode: '50670',
+    streetAddress: company?.street || 'Im Mediapark 5',
+    addressLocality: company?.city || 'Köln',
+    postalCode: company?.zip || '50670',
     addressCountry: 'DE'
   },
   contactPoint: {
     '@type': 'ContactPoint',
-    telephone: '+498008888369',
+    telephone: company?.phoneIntl || '+498008888369',
     contactType: 'customer service',
-    email: 'info@metra-baulogistik.de'
+    email: company?.email || 'info@metra-baulogistik.de'
   },
   sameAs: []
 };
@@ -45,13 +50,13 @@ const organizationSchema = {
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
-  name: 'METRA Baulogistik & Projektsteuerung GmbH',
+  name: company?.name || 'METRA Baulogistik & Projektsteuerung GmbH',
   image: `${siteUrl}${ogImage}`,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: 'Im Mediapark 5',
-    addressLocality: 'Köln',
-    postalCode: '50670',
+    streetAddress: company?.street || 'Im Mediapark 5',
+    addressLocality: company?.city || 'Köln',
+    postalCode: company?.zip || '50670',
     addressCountry: 'DE'
   },
   geo: {
@@ -60,7 +65,7 @@ const localBusinessSchema = {
     longitude: '6.9525'
   },
   url: siteUrl,
-  telephone: '+498008888369',
+  telephone: company?.phoneIntl || '+498008888369',
   priceRange: '€€',
   openingHoursSpecification: {
     '@type': 'OpeningHoursSpecification',
